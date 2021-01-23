@@ -14,19 +14,22 @@ import {
   CardActions,
 } from '@material-ui/core';
 
+import useStyles from './customStyles';
+
 export default function App() {
+  const classes = useStyles();
   return (
     <BrowserRouter>
     <Grid container direction="row" spacing={2}>
       <Grid item xs={12}>
         <Navbar />
       </Grid>
-      <Grid item xs={2}>
+      <Grid item xs={2} style={{backgroundColor: 'lightgrey', marginLeft: '1vh'}}>
         <Sidebar items={items} />
       </Grid>
-      <Grid item xs={10}>
-        <Card variant="outlined" style={{border: 'none'}}>
-          <CardActions style={{justifyContent: "center"}}>
+      <Grid className={classes.grid} item xs={8}>
+        <Card className={classes.card}>
+          <CardActions>
             <Switch>
               <Route component={SignIn} exact path="/" />
               <Route component={SignUp} exact path="/users/register" />

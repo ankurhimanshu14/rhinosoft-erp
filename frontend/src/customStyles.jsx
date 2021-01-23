@@ -1,8 +1,11 @@
 import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles({
+    grid: {
+        height: 'auto',
+        padding: '10vh'
+    },
     card: {
-        maxWidth: '250px'
     },
     button:{
         textTransform: 'none',

@@ -48,7 +48,7 @@ export default function Sidebar({items}) {
               <Collapse in={open[name]} timeout="auto" unmountOnExit>
               <List disablePadding dense>
                 {subItems.map((subItem) => (
-                  <ListItem style={{color: 'black'}} key={subItem.name} button component={Link} href={subItem.link}>
+                  <ListItem style={{color: 'grey'}} key={subItem.name} button component={Link} href={subItem.link}>
                     <ListItemIcon>{subItem.icon}</ListItemIcon>
                     <ListItemText primary={subItem.label} />
                   </ListItem>

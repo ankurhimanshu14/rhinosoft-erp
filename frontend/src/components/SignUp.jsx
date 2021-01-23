@@ -13,7 +13,7 @@ export default function SignUp() {
     const classes = useStyles();
     return(
         <>
-        <Grid container direction="column" spacing={0} direction="column" alignItems="center" justify="center">
+        <Grid container spacing={0} direction="column" alignItems="center" justify="center">
             <Grid item xs={6}>
             <Typography gutterBottom variant="h5" component="h2">
                 Create Account Here
