@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {
+  Grid,
   Link,
   Collapse,
   List,
@@ -8,7 +9,8 @@ import {
   ListItem,
   ListItemIcon,
   Divider,
-  ListItemText
+  ListItemText,
+  Typography
 } from '@material-ui/core';
 
 import ExpandLess from '@material-ui/icons/ExpandLess';
@@ -23,6 +25,7 @@ export default function Sidebar({items}) {
   };
 
   return (
+    <>
     <List
     disablePadding
     component="nav"
@@ -59,5 +62,9 @@ export default function Sidebar({items}) {
       </>
       ))}
     </List>
+    <Grid container spacing={100}>
+          <Typography>Social Media Icons</Typography>
+    </Grid>
+    </>
   )
 }

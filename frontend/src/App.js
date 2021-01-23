@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
+import Profile from './components/Profile';
 import items from './MenuList';
 
 import {
@@ -24,11 +25,12 @@ export default function App() {
         <Sidebar items={items} />
       </Grid>
       <Grid item xs={10}>
-        <Card>
+        <Card variant="outlined" style={{border: 'none'}}>
           <CardActions style={{justifyContent: "center"}}>
             <Switch>
               <Route component={SignIn} exact path="/" />
               <Route component={SignUp} exact path="/users/register" />
+              <Route component={Profile} exact path="/users/profile" />
             </Switch>
           </CardActions>
         </Card>
