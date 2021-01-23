@@ -18,7 +18,8 @@
   "homepage": "https://github.com/ankurhimanshu14/erp2#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "mongoose": "^5.11.13"
+    "mongoose": "^5.11.13",
+    "mysql": "^2.18.1"
   },
   "keywords": []
 }
