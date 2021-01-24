@@ -24,7 +24,7 @@ export default function SignUp() {
                         <TextField variant="outlined" margin="dense" type="password" label="Password" />
                 </Grid>
                 <Grid container direction="row" justify="space-evenly" alignItems="center" spacing={0} style={{marginTop: '2vh'}}>
-                        <Button variant="contained" className={classes.buttonWhite} href="/users/register">Create Account</Button>
+                        <Button variant="outlined" className={classes.buttonWhite} href="/users/register">Create Account</Button>
                         <Button variant="contained" className={classes.buttonBlue}>Sign In</Button>
                 </Grid>
             </Paper>

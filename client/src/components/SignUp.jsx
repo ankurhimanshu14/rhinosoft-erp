@@ -5,13 +5,19 @@ import {
     TextField,
     Typography,
     Button,
-    Paper
+    Paper,
+    Dialog,
+    DialogTitle,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    Snackbar
 } from '@material-ui/core';
 
 import useStyles from '../customStyles';
 
 export default function SignUp() {
-
+    //Inputs
     const [values, setValues] = React.useState({
         firstName: '',
         middleName: '',
@@ -26,9 +32,44 @@ export default function SignUp() {
         setValues({[event.target.name]: event.target.value});
     }
 
-    const handleClick = event => {
+    //Register
+    const [dialog, setDialog] = React.useState(false);
+
+    const handleClick = () => {        
+        setDialog(!dialog);
+    }
+
+    const handleDisagree = () => {
+        setDialog(!dialog);
+    }
+
+    //Snackbar
+    const [snack, setSnack] = React.useState(false);
+
+    const handleAgree = (event) => {
+        setDialog(!dialog);
+
         event.preventDefault();
-        console.log(values);    
+        const requestOptions = {
+            credentials: 'include',
+            mode: 'cors',
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(values),
+        };
+        
+        fetch('http://localhost:5000/api/v1/private/users/registration', requestOptions)
+        .then(res => res.json())
+        .then(data => {
+            setSnack(!snack);
+        })
+        .catch(err => {
+            alert('There has been a problem with your fetch operation: ' + err);
+        });
+    }
+
+    const handleClose = () => {
+        setSnack(!snack);
     }
 
     const classes = useStyles();
@@ -95,35 +136,46 @@ export default function SignUp() {
                     margin="dense"
                     type="text"
                     label="Username" />
-                    <Grid container direction="row" justify="flex-start" alignItems="space-between" spacing={1}>
-                        <Grid item xs={6}>
-                            <TextField
-                            id="password"
-                            name="password"
-                            value={values.password}
-                            onChange={handleChange}
-                            variant="outlined"
-                            margin="dense"
-                            type="password"
-                            label="Password" />
-                        </Grid>
-                        <Grid item xs={6}>
-                            <TextField
-                            id="confirmPassword"
-                            name="confirmPassword"
-                            variant="outlined"
-                            margin="dense"
-                            type="password"
-                            label="Confirm Password" />
-                        </Grid>
-                    </Grid>
+                    <TextField
+                    id="password"
+                    name="password"
+                    value={values.password}
+                    onChange={handleChange}
+                    variant="outlined"
+                    margin="dense"
+                    type="password"
+                    label="Password" />
                 </Grid>
                 <Grid container direction="row" justify="space-evenly" alignItems="center" spacing={0} style={{marginTop: '2vh'}}>
-                        <Button variant="contained" className={classes.buttonWhite} href="/">Already have an account?</Button>
+                        <Button variant="outlined" className={classes.buttonWhite} href="/">Already have an account?</Button>
                         <Button variant="contained" className={classes.buttonBlue} onClick={handleClick}>Register</Button>
                 </Grid>
             </Paper>
         </Grid>
+        <Dialog open={dialog}>
+            <DialogTitle>Terms and Conditions</DialogTitle>
+            <DialogContent>
+                <DialogContentText>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Hic commodi, consequatur molestias ratione aperiam facilis laborum maiores beatae. Aliquid alias amet veniam quibusdam harum quaerat consequatur ut veritatis facere qui!</DialogContentText>
+            </DialogContent>
+            <DialogActions>
+                <Button className={classes.buttonWhite} onClick={handleDisagree}>Disagree</Button>
+                <Button className={classes.buttonBlue} onClick={handleAgree}>Agree</Button>
+            </DialogActions>
+        </Dialog>
+        <Snackbar
+        anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
+        open={snack}
+        message="User Account Created!"
+        autoHideDuration={3000}
+        onClose={handleClose}
+        />
+        <Snackbar
+        anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
+        open={snack}
+        message="Error encountered"
+        autoHideDuration={3000}
+        onClose={handleClose}
+        />
         </>
     );
 }

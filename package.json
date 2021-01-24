@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "client-install": "cd client && npm install",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -17,9 +21,21 @@
   },
   "homepage": "https://github.com/ankurhimanshu14/erp2#readme",
   "dependencies": {
+    "bcrypt": "^5.0.0",
+    "concurrently": "^5.3.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "mongoose": "^5.11.13",
+    "express-session": "^1.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.0",
+    "mongoose": "^5.10.6",
+    "redis": "^3.0.2",
     "mysql": "^2.18.1"
   },
-  "keywords": []
+  "keywords": [],
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
 }
