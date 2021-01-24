@@ -24,10 +24,10 @@ export default function App() {
       <Grid item xs={12}>
         <Navbar />
       </Grid>
-      <Grid item xs={2} style={{backgroundColor: 'lightgrey', marginLeft: '1vh'}}>
+      <Grid item xs={2}>
         <Sidebar items={items} />
       </Grid>
-      <Grid className={classes.grid} item xs={8}>
+      <Grid className={classes.grid} item xs={10}>
         <Card className={classes.card}>
           <CardActions>
             <Switch>

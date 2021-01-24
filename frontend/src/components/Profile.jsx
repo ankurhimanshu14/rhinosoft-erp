@@ -22,7 +22,7 @@ export default function Profile() {
                     component="img"
                     alt="Contemplative Reptile"
                     height="140"
-                    image="/static/images/cards/contemplative-reptile.jpg"
+                    image="../../public/SCADA.png"
                     title="Contemplative Reptile"
                     />
                     <CardContent>

@@ -4,49 +4,125 @@ import {
     Grid,
     TextField,
     Typography,
-    Button
+    Button,
+    Paper
 } from '@material-ui/core';
 
 import useStyles from '../customStyles';
 
 export default function SignUp() {
+
+    const [values, setValues] = React.useState({
+        firstName: '',
+        middleName: '',
+        lastName: '',
+        email: '',
+        username: '',
+        password: ''
+    });
+
+    const handleChange = (event) => {
+        event.preventDefault();
+        setValues({[event.target.name]: event.target.value});
+    }
+
+    const handleClick = event => {
+        event.preventDefault();
+        console.log(values);    
+    }
+
     const classes = useStyles();
     return(
         <>
-        <Grid container spacing={0} direction="column" alignItems="center" justify="center">
-            <Grid item xs={6}>
-            <Typography gutterBottom variant="h5" component="h2">
-                Create Account Here
-            </Typography>
-            </Grid>
-            <Grid item spacing={3} direction="column">
-                <Grid item xs={6}>
-                    <TextField variant="outlined" label="First Name" margin="dense" />
-                    <TextField variant="outlined" label="Last Name" margin="dense" />
+        <Grid container style={{display:'flex', justifyContent: 'center', position: 'relative'}}>
+            <Paper variant="outlined" className={classes.paper}>
+                <Grid container direction="column" justify="flex-start" alignItems="stretch" spacing={0}>
+                    <Grid item xs={12}>
+                        <Typography gutterBottom variant="h5" component="h2">
+                            Create Account
+                        </Typography>
+                    </Grid>
+                    <Grid container direction="row" justify="flex-start" alignItems="space-between" spacing={1}>
+                        <Grid item xs={4}>
+                            <TextField
+                            id="firstName"
+                            name="firstName"
+                            value={values.firstName}
+                            onChange={handleChange}
+                            variant="outlined"
+                            margin="dense"
+                            type="text"
+                            label="First Name" />
+                        </Grid>
+                        <Grid item xs={4}>
+                            <TextField
+                            id="middleName"
+                            name="middleName"
+                            value={values.middleName}
+                            onChange={handleChange}
+                            variant="outlined"
+                            margin="dense"
+                            type="text"
+                            label="Middle Name" />
+                        </Grid>
+                        <Grid item xs={4}>
+                            <TextField
+                            id="lastName"
+                            name="lastName"
+                            value={values.lastName}
+                            onChange={handleChange}
+                            variant="outlined"
+                            margin="dense"
+                            type="text"
+                            label="Last Name" />
+                        </Grid>
+                    </Grid>
+                    <TextField
+                    id="email"
+                    name="email"
+                    value={values.email}
+                    onChange={handleChange}
+                    variant="outlined"
+                    margin="dense"
+                    type="email"
+                    label="Email" />
+                    <TextField
+                    id="username"
+                    name="username"
+                    value={values.username}
+                    onChange={handleChange}
+                    variant="outlined"
+                    margin="dense"
+                    type="text"
+                    label="Username" />
+                    <Grid container direction="row" justify="flex-start" alignItems="space-between" spacing={1}>
+                        <Grid item xs={6}>
+                            <TextField
+                            id="password"
+                            name="password"
+                            value={values.password}
+                            onChange={handleChange}
+                            variant="outlined"
+                            margin="dense"
+                            type="password"
+                            label="Password" />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField
+                            id="confirmPassword"
+                            name="confirmPassword"
+                            variant="outlined"
+                            margin="dense"
+                            type="password"
+                            label="Confirm Password" />
+                        </Grid>
+                    </Grid>
                 </Grid>
-                <Grid item xs={6}>
-                <TextField variant="outlined" label="Email ID" margin="dense" />
+                <Grid container direction="row" justify="space-evenly" alignItems="center" spacing={0} style={{marginTop: '2vh'}}>
+                        <Button variant="contained" className={classes.buttonWhite} href="/">Already have an account?</Button>
+                        <Button variant="contained" className={classes.buttonBlue} onClick={handleClick}>Register</Button>
                 </Grid>
-                <Grid item xs={6}>
-                <TextField variant="outlined" label="Username" margin="dense" />
-                </Grid>
-                <Grid item spacing={3} direction="row">
-                <TextField type="password" variant="outlined" label="Password" margin="dense" />
-                <TextField type="password" variant="outlined" label="Confirm Password" margin="dense" />
-                </Grid>
-            </Grid>
-            <Grid container spacing={2} direction="row" alignItems="center" justify="center">
-            <Grid item xs={2}>
-            <Button size="small" color="primary" style={{textTransform: 'none'}} href="/">
-                Already have an account?
-            </Button>
-            </Grid>
-            <Grid item xs={0}>
-            <Button variant="contained" size="small" color="primary" className={classes.button}>
-                Register
-            </Button>
-            </Grid>
-            </Grid>
+            </Paper>
         </Grid>
         </>
     );
