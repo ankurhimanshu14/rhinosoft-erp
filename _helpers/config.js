@@ -1,7 +1,8 @@
 const mysql = require('mysql');
 
 const config = {
-    user: 'localhost',
+    host: 'localhost',
+    user: 'root',
     password: '',
     database: 'mws_database'
 };
