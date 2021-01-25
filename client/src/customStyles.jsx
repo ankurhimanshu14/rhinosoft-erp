@@ -11,10 +11,10 @@ const useStyles = makeStyles(theme => ({
     paper: {
         marginTop: '20vh',
         padding: '5vh',
-        width:'40%',
+        width:'25%',
         height: '50%',
         textAlign: 'center',
-        color: theme.palette.text.secondary,    
+        color: theme.palette.text.secondary,
     },
     card: {
         width: '100%',

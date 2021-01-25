@@ -2,6 +2,7 @@ import React from 'react';
 
 import {
     Grid,
+    FormControlLabel,
     TextField,
     Typography,
     Button,
@@ -11,7 +12,8 @@ import {
     DialogActions,
     DialogContent,
     DialogContentText,
-    Snackbar
+    Snackbar,
+    Checkbox
 } from '@material-ui/core';
 
 import useStyles from '../customStyles';
@@ -42,6 +44,16 @@ export default function SignUp() {
     const handleDisagree = () => {
         setDialog(!dialog);
     }
+
+    //Checkbox
+    const [checked, setChecked] = React.useState({
+        admin: false
+    });
+
+    const handleCheck = event => {
+      setChecked({[event.target.name]: event.target.checked});
+        console.log(checked);
+    };
 
     //Snackbar
     const [snack, setSnack] = React.useState(false);
@@ -145,6 +157,10 @@ export default function SignUp() {
                     margin="dense"
                     type="password"
                     label="Password" />
+                    <FormControlLabel
+                    control={<Checkbox checked={checked.admin} onChange={handleCheck} name="admin" size="small" />}
+                    label="User"
+                    />
                 </Grid>
                 <Grid container direction="row" justify="space-evenly" alignItems="center" spacing={0} style={{marginTop: '2vh'}}>
                         <Button variant="outlined" className={classes.buttonWhite} href="/">Already have an account?</Button>
