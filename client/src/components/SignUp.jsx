@@ -26,7 +26,10 @@ export default function SignUp() {
         lastName: '',
         email: '',
         username: '',
-        password: ''
+        password: '',
+        role: '',
+        authority: '',
+        acceptTerms: ''
     });
 
     const handleChange = (event) => {
@@ -52,7 +55,6 @@ export default function SignUp() {
 
     const handleCheck = event => {
       setChecked({[event.target.name]: event.target.checked});
-        console.log(checked);
     };
 
     //Snackbar
@@ -69,14 +71,16 @@ export default function SignUp() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(values),
         };
+
+        console.log(values.firstName);
         
-        fetch('http://localhost:5000/api/v1/private/users/registration', requestOptions)
+        fetch('http://localhost:5000/api/v1/users/registration', requestOptions)
         .then(res => res.json())
         .then(data => {
             setSnack(!snack);
         })
         .catch(err => {
-            alert('There has been a problem with your fetch operation: ' + err);
+            console.log('There has been a problem with your fetch operation: ' + err);
         });
     }
 

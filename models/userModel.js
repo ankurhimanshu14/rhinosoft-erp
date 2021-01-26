@@ -10,24 +10,24 @@ connection.connect((err) => {
 
     let createUser = `create table if not exists users(
         ID INT PRIMARY KEY AUTO_INCREMENT,
-        FIRST_NAME VARCHAR(10) NOT NULL,
+        FIRST_NAME VARCHAR(10),
         MIDDLE_NAME VARCHAR(10),
-        LAST_NAME VARCHAR(10) NOT NULL,
-        EMAIL VARCHAR(50) NOT NULL,
-        USERNAME VARCHAR(15) NOT NULL,
-        PASSWORD VARCHAR(20) NOT NULL
+        LAST_NAME VARCHAR(10),
+        EMAIL VARCHAR(50),
+        USERNAME VARCHAR(15),
+        PASSWORD VARCHAR(20),
+        ROLE TINYINT(1),
+        AUTHORITY VARCHAR(15),
+        ACCEPT_TERMS TINYINT(1)
     )`;
 
     connection.query(createUser, (err, results, fields) => {
         if(err) {
             console.log(err.message);
+        } else {
+            console.log('Users created!')
         }
     });
-
-    let sql = `INSERT INTO users(FIRST_NAME, MIDDLE_NAME, LAST_NAME, EMAIL, USERNAME, PASSWORD, COMPLETED)
-    VALUES('ANKUR', '', 'HIMANSHU', 'ankurhimanshu1408@gmail.com', 'ankur', 'ankur@123', true)`;
-
-    connection.query(sql);
 
     connection.end();
 })
