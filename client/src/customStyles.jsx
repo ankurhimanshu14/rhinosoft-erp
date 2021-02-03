@@ -8,10 +8,14 @@ const useStyles = makeStyles(theme => ({
         height: 'auto',
         padding: '10vh 10vh 10vh 10vh'
     },
+
+    margin: {
+        margin: theme.spacing(1)
+    },
     paper: {
-        marginTop: '20vh',
+        marginTop: '15vh',
         padding: '5vh',
-        width:'25%',
+        width:'30%',
         height: '50%',
         textAlign: 'center',
         color: theme.palette.text.secondary,
@@ -20,26 +24,9 @@ const useStyles = makeStyles(theme => ({
         width: '100%',
         height: '80vh',
     },
-    buttonBlue:{
-        textTransform: 'none',
-        backgroundColor: '#1a73e8',
-        color: 'white',
-        fontWeight: 'bold',
-        '&:hover': {
-            backgroundColor: 'white !important',
-            color: '#1a73e8 !important'
-        }
-    },
-    buttonWhite:{
-        textTransform: 'none',
-        backgroundColor: 'white',
-        color: '#1a73e8',
-        border:'none',
-        fontWeight: 'bold',
-        '&:hover': {
-            backgroundColor: '#1a73e8 !important',
-            color: 'white !important'
-        }
+    button:{
+        color: '#1976d2',
+        border: '1px solid rgba(25, 118, 210, 0.5)',
     }
 }));
 

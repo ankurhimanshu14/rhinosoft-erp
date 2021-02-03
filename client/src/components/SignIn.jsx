@@ -6,6 +6,7 @@ import {
     TextField,
     Typography,
     Button
+
 } from '@material-ui/core';
 
 import useStyles from '../customStyles';
@@ -13,7 +14,7 @@ import useStyles from '../customStyles';
 export default function SignUp() {
     const classes = useStyles();
     return(
-        <>
+
         <Grid container style={{display:'flex', justifyContent: 'center', position: 'relative'}}>
             <Paper variant="outlined" className={classes.paper}>
                 <Grid container direction="column" justify="space-evenly" alignItems="stretch" spacing={0}>
@@ -24,11 +25,11 @@ export default function SignUp() {
                         <TextField variant="outlined" margin="dense" type="password" label="Password" />
                 </Grid>
                 <Grid container direction="row" justify="space-evenly" alignItems="center" spacing={0} style={{marginTop: '2vh'}}>
-                        <Button variant="outlined" className={classes.buttonWhite} href="/users/register">Create Account</Button>
-                        <Button variant="contained" className={classes.buttonBlue}>Sign In</Button>
+                        <Button variant="outlined" className={classes.button} href="/users/register">Create Account</Button>
+                        <Button variant="outlined" className={classes.button}>Sign In</Button>
                 </Grid>
             </Paper>
         </Grid>
-        </>
+
     );
 }

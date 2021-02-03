@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const cookieParser = require('cookie-parser');
-const session = require('express-session');
+// const session = require('express-session');
 const PORT = process.env.PORT;
 const cors = require('cors');
 const app = express();
@@ -13,11 +13,11 @@ app.use(cookieParser());
 app.use(cors({origin: 'http://localhost:3000', credentials: true }));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
-app.use(session({
-  secret: 'ThisIsNotSafe',
-  resave: true,
-  saveUninitialized: true
-}))
+// app.use(session({
+//   secret: 'ThisIsNotSafe',
+//   resave: true,
+//   saveUninitialized: true
+// }))
 
 app.use((req, res, next) => {
   const allowedOrigin = 'http://localhost:3000';

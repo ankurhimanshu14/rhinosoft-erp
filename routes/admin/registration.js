@@ -3,40 +3,33 @@ const config = require('../../_helpers/config');
 
 let connection = mysql.createConnection(config);
 
+const { FIELDS } = require('../../models/userModel');
+
 module.exports = {
     getDataFromUser: (req, res, next) => {
-        console.log('-----------Hello------------------');
         req._newUser = {
-            'firstName': req.body.firstName,
-            'middleName': req.body.middleName,
-            'lastName': req.body.lastName,
-            'email': req.body.email,
-            'username': req.body.username,
-            'password': req.body.password,
-            'role': req.body.role,
-            'authority': req.body.authority,
-            'acceptTerms': req.body.acceptTerms
+            [FIELDS.FIRST_NAME]: req.body.firstName,
+            [FIELDS.MIDDLE_NAME]: req.body.middleName,
+            [FIELDS.LAST_NAME]: req.body.lastName,
+            [FIELDS.EMAIL]: req.body.email,
+            [FIELDS.USERNAME]: req.body.username,
+            [FIELDS.PASSWORD]: req.body.password,
         };
-
-        console.log('-----------------_newUser-------------------', req._newUser);
 
         next();
     },
 
-    saveDataToMySQL: async (req, res, next) => {
+    saveDataToMySQL: (req, res, next) => {
 
-        let statement = `INSERT INTO users(FIRST_NAME, MIDDLE_NAME, LAST_NAME, EMAIL, USERNAME, PASSWORD, ROLE, AUTHORITY, ACCEPT_TERMS)
-                    VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+        let stmt = `INSERT INTO USERS(firstName, middleName, lastName, email, username, password) VALUES(?, ?, ?, ?, ?, ?)`;
 
         let user = Object.values(req._newUser);
-
-        req._savedUser = connection.query(statement, user, (err, results, fields) => {
+        
+        connection.query(stmt, user, (err, results, fields) => {
             if(err) {
-                console.log('Error: ' + err.message);
-                return { status: 404, error: error.message, data: null };
+                return err.message;
             } else {
-                console.log(results.InsertId)
-                return { status: 200, error: null, data: results.InsertId }
+                console.log(results.insertId);
             }
         });
 
@@ -44,8 +37,9 @@ module.exports = {
     },
     
     sendResponse: (req, res, next) => {
-        const { status, error, data } = req._savedUser;
-        res.status(status).json({ error, data }).end();
+        // const { status, error, data } = req._savedUser;
+        // console.log(status);
+        // res.json({ error, data }).end();
 
         next();
     }

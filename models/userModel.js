@@ -3,31 +3,37 @@ const config = require('../_helpers/config');
 
 let connection = mysql.createConnection(config);
 
-connection.connect((err) => {
+const FIELDS = {
+    FIRST_NAME: 'firstName',
+    MIDDLE_NAME: 'middleName',
+    LAST_NAME: 'lastName',
+    EMAIL: 'email',
+    USERNAME: 'username',
+    PASSWORD: 'password'
+}
+
+const conn = connection.connect((err) => {
     if(err) {
         return console.error('Error: ' + err.message);
     }
 
-    let createUser = `create table if not exists users(
+    let SCHEMA = `CREATE TABLE IF NOT EXISTS USERS(
         ID INT PRIMARY KEY AUTO_INCREMENT,
-        FIRST_NAME VARCHAR(10),
-        MIDDLE_NAME VARCHAR(10),
-        LAST_NAME VARCHAR(10),
-        EMAIL VARCHAR(50),
-        USERNAME VARCHAR(15),
-        PASSWORD VARCHAR(20),
-        ROLE TINYINT(1),
-        AUTHORITY VARCHAR(15),
-        ACCEPT_TERMS TINYINT(1)
-    )`;
+        ${FIELDS.FIRST_NAME} VARCHAR(10) NOT NULL,
+        ${FIELDS.MIDDLE_NAME} VARCHAR(10),
+        ${FIELDS.LAST_NAME} VARCHAR(10) NOT NULL,
+        ${FIELDS.EMAIL} VARCHAR(50) NOT NULL,
+        ${FIELDS.USERNAME} VARCHAR(15) NOT NULL,
+        ${FIELDS.PASSWORD} VARCHAR(20) NOT NULL
+    )ENGINE=INNODB`;
 
-    connection.query(createUser, (err, results, fields) => {
+    connection.query(SCHEMA, (err, results, fields) => {
         if(err) {
             console.log(err.message);
         } else {
-            console.log('Users created!')
+            console.log('Users table is ready!')
         }
     });
-
-    connection.end();
 })
+
+module.exports = { CONN: conn, FIELDS: FIELDS };

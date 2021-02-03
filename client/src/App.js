@@ -6,7 +6,7 @@ import Sidebar from './components/Sidebar';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import Profile from './components/Profile';
-import Steels from './components/Steels';
+// import Steels from './components/Steels';
 import items from './MenuList';
 
 import {
@@ -35,7 +35,7 @@ export default function App() {
               <Route component={SignIn} exact path="/" />
               <Route component={SignUp} exact path="/users/register" />
               <Route component={Profile} exact path="/users/profile" />
-              <Route component={Steels} exact path="/rmStore/inventory" />
+              {/* <Route component={Steels} exact path="/rmStore/inventory" /> */}
             </Switch>
           </CardActions>
         </Card>
