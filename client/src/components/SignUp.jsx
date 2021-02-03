@@ -43,6 +43,7 @@ function SignUp() {
             <FormControl fullWidth className={classes.margin} variant="outlined">
                 <InputLabel htmlFor="fullName">Full Name</InputLabel>
                 <OutlinedInput
+                    margin="dense"
                     required
                     type="text"
                     name="fullName"
@@ -57,6 +58,7 @@ function SignUp() {
             <FormControl fullWidth className={classes.margin} variant="outlined">
                 <InputLabel htmlFor="email">Email ID</InputLabel>
                 <OutlinedInput
+                    margin="dense"
                     required
                     type="email"
                     name="email"
@@ -71,6 +73,7 @@ function SignUp() {
             <FormControl fullWidth className={classes.margin} variant="outlined">
                 <InputLabel htmlFor="username">Username</InputLabel>
                 <OutlinedInput
+                    margin="dense"
                     required
                     type="text"
                     name="username"
@@ -85,6 +88,7 @@ function SignUp() {
             <FormControl fullWidth className={classes.margin} variant="outlined">
                 <InputLabel htmlFor="password">Password</InputLabel>
                 <OutlinedInput
+                    margin="dense"
                     required
                     type="password"
                     name="password"
@@ -102,7 +106,7 @@ function SignUp() {
             </Grid>
             </Paper>
         </Grid>
-        <Dialogbox ref={dialogboxRef} data={input} />
+        <Dialogbox ref={dialogboxRef} elementValue={input} />
         </>
     )
 }

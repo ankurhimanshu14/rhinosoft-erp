@@ -13,16 +13,15 @@ const useStyles = makeStyles(theme => ({
         margin: theme.spacing(1)
     },
     paper: {
-        marginTop: '15vh',
         padding: '5vh',
-        width:'30%',
+        width:'40%',
         height: '50%',
         textAlign: 'center',
         color: theme.palette.text.secondary,
     },
     card: {
         width: '100%',
-        height: '80vh',
+        height: '100vh',
     },
     button:{
         color: '#1976d2',

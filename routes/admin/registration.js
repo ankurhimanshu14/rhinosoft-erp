@@ -8,9 +8,7 @@ const { FIELDS } = require('../../models/userModel');
 module.exports = {
     getDataFromUser: (req, res, next) => {
         req._newUser = {
-            [FIELDS.FIRST_NAME]: req.body.firstName,
-            [FIELDS.MIDDLE_NAME]: req.body.middleName,
-            [FIELDS.LAST_NAME]: req.body.lastName,
+            [FIELDS.FULL_NAME]: req.body.fullName,
             [FIELDS.EMAIL]: req.body.email,
             [FIELDS.USERNAME]: req.body.username,
             [FIELDS.PASSWORD]: req.body.password,
@@ -21,7 +19,7 @@ module.exports = {
 
     saveDataToMySQL: (req, res, next) => {
 
-        let stmt = `INSERT INTO USERS(firstName, middleName, lastName, email, username, password) VALUES(?, ?, ?, ?, ?, ?)`;
+        let stmt = `INSERT INTO USERS(fullName, email, username, password) VALUES(?, ?, ?, ?)`;
 
         let user = Object.values(req._newUser);
         
@@ -32,14 +30,6 @@ module.exports = {
                 console.log(results.insertId);
             }
         });
-
-        next();
-    },
-    
-    sendResponse: (req, res, next) => {
-        // const { status, error, data } = req._savedUser;
-        // console.log(status);
-        // res.json({ error, data }).end();
 
         next();
     }
