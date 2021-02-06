@@ -1,4 +1,4 @@
-import {forwardRef, useState, useImperativeHandle, useEffect } from 'react';
+import {forwardRef, useState, useImperativeHandle, useEffect, useCallback, useRef } from 'react';
 
 import clsx from 'clsx';
 import {
@@ -12,6 +12,8 @@ import {
     useTheme
 } from '@material-ui/core';
 
+import Snack from './Snack';
+
 import ThumbDownSharpIcon from '@material-ui/icons/ThumbDownSharp';
 import ThumbUpSharpIcon from '@material-ui/icons/ThumbUpSharp';
 
@@ -21,33 +23,16 @@ const Dialogbox = forwardRef((props, ref) => {
     const classes = useStyles();
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+
+    const snackRef = useRef();
     
     //DIALOG BOX
     const [open, setOpen] = useState(false);
 
+    const [message, setMessage] = useState(null);
+
     const handleDisagree = () => {
         setOpen(false);
-    };
-
-    //SUBMIT FORM DATA
-    const handleAgree = () => {
-      setOpen(false);
-      const requestOptions = {
-        credentials: 'include',
-        mode: 'cors',
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(props.elementValue),
-      };
-    
-      fetch('http://localhost:5000/api/v1/users/register', requestOptions)
-      .then(res => res.json())
-      .then(data => {
-        alert(('New User Added: ' + data.fullName))
-      })
-      .catch(err => {
-          alert('There has been a problem with your fetch operation: ' + err);
-      });        
     };
 
     useImperativeHandle(
@@ -59,29 +44,54 @@ const Dialogbox = forwardRef((props, ref) => {
         })
     )
 
+    const handleAgree = useCallback(async () => {
+      const requestOptions = {
+        credentials: 'include',
+        mode: 'cors',
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(props.elementValue),
+      };
+    
+      await fetch('http://localhost:5000/api/v1/users/register', requestOptions)
+      .then(res => res.text())
+      .then(() => {
+        setMessage('New User Added: ' + props.elementValue.fullName);
+      })
+      .catch(err => {
+        setMessage('There has been a problem with your fetch operation: ' + err);
+      });
+      setOpen(false);
+      snackRef.current.handleSnackOpen()
+    },[props]);
+
     useEffect(() => {
-      handleAgree()
-    }, []);
+    }, [handleAgree]);
 
     return(
+      <>
         <Dialog
         fullScreen={fullScreen}
         open={open}
         onClose={handleDisagree}
-        aria-labelledby="responsive-dialog-title"
+        aria-labelledby="TnC"
         >
-        <DialogTitle id="responsive-dialog-title">{"Use Google's location service?"}</DialogTitle>
+        <DialogTitle id="TnC">{"Terms and Conditions"}</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Let Google help apps determine location. This means sending anonymous location data to
-            Google, even when no apps are running.
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+            Explicabo accusamus velit autem quo dolore quaerat eaque ex 
+            saepe asperiores veniam, in delectus animi repudiandae eveniet 
+            alias, voluptatem earum facilis voluptas.
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button autoFocus variant="oultined" className={clsx(classes.margin, classes.button)} onClick={handleDisagree} startIcon={<ThumbDownSharpIcon />} >Disagree</Button>
-          <Button autoFocus variant="outlined" className={clsx(classes.margin, classes.button)} onClick={handleAgree}  endIcon={<ThumbUpSharpIcon />} >Agree</Button>
+          <Button autoFocus variant="outlined" className={clsx(classes.margin, classes.button)} onClick={handleAgree} endIcon={<ThumbUpSharpIcon />} >Agree</Button>
         </DialogActions>
       </Dialog>
+      <Snack ref={snackRef} elementValue = {message} />
+      </>
     )
 })
 

@@ -4,7 +4,7 @@ import clsx from 'clsx';
 
 import {
     Grid,
-    Paper,
+    Card,
     Typography,
     FormControl,
     OutlinedInput,
@@ -35,10 +35,12 @@ function SignUp() {
         setInput({...input, [prop]: event.target.value})
     };
 
+    const { fullName, email, username, password } = input;
+
     return (
         <>
         <Grid container direction="row" justify="space-evenly" alignItems="stretch">
-            <Paper component="form" className={classes.paper}>
+            <Card component="form" className={classes.paper}>
                 <Typography gutterBottom variant="h5" component="h2">Create Account Here</Typography>
             <FormControl fullWidth className={classes.margin} variant="outlined">
                 <InputLabel htmlFor="fullName">Full Name</InputLabel>
@@ -49,7 +51,7 @@ function SignUp() {
                     name="fullName"
                     id="fullName"
                     aria-describedby="fullName-helper-text"
-                    value={input.fullName}
+                    value={fullName}
                     onChange={handleInput('fullName')}
                     labelWidth={80}
                 />
@@ -64,7 +66,7 @@ function SignUp() {
                     name="email"
                     id="email"
                     aria-describedby="email-helper-text"
-                    value={input.email}
+                    value={email}
                     onChange={handleInput('email')}
                     labelWidth={80}
                 />
@@ -79,7 +81,7 @@ function SignUp() {
                     name="username"
                     id="username"
                     aria-describedby="username-helper-text"
-                    value={input.username}
+                    value={username}
                     onChange={handleInput('username')}
                     labelWidth={80}
                 />
@@ -94,7 +96,7 @@ function SignUp() {
                     name="password"
                     id="password"
                     aria-describedby="password-helper-text"
-                    value={input.password}
+                    value={password}
                     onChange={handleInput('password')}
                     labelWidth={80}
                 />
@@ -104,7 +106,7 @@ function SignUp() {
                 <Button variant="oultined" className={clsx(classes.margin, classes.button)} href="/" startIcon={<ChevronLeftSharpIcon />} >Do you have an account?</Button>
                 <Button variant="outlined" className={clsx(classes.margin, classes.button)} onClick={() => { dialogboxRef.current.handleClickOpen() }} endIcon={<ChevronRightSharpIcon />} >Register</Button>
             </Grid>
-            </Paper>
+            </Card>
         </Grid>
         <Dialogbox ref={dialogboxRef} elementValue={input} />
         </>
