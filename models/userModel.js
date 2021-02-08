@@ -18,10 +18,10 @@ const conn = connection.connect((err) => {
     let SCHEMA = `CREATE TABLE IF NOT EXISTS USERS(
         ID INT PRIMARY KEY AUTO_INCREMENT,
         ${FIELDS.FULL_NAME} VARCHAR(50) NOT NULL,
-        ${FIELDS.EMAIL} VARCHAR(50) NOT NULL,
+        ${FIELDS.EMAIL} VARCHAR(255) NOT NULL,
         ${FIELDS.USERNAME} VARCHAR(15) NOT NULL,
-        ${FIELDS.PASSWORD} VARCHAR(20) NOT NULL
-    )ENGINE=INNODB`;
+        ${FIELDS.PASSWORD} LONGTEXT NOT NULL
+    )ENGINE=INNODB DEFAULT CHARSET=utf8`;
 
     connection.query(SCHEMA, (err, results, fields) => {
         if(err) {

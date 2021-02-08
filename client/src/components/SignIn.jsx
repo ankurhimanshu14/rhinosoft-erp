@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef, forwardRef } from 'react';
 
 import clsx from 'clsx';
 
@@ -13,12 +13,16 @@ import {
     Button
 } from '@material-ui/core';
 
+import Snack from './Snack';
+
 import ChevronLeftSharpIcon from '@material-ui/icons/ChevronLeftSharp';
 import ChevronRightSharpIcon from '@material-ui/icons/ChevronRightSharp';
 
 import useStyles from '../customStyles';
 
-function SignIn(props) {
+const SignIn = forwardRef((props, ref) => {
+
+    const snackRef = useRef();
 
     const [input, getInput] = useState({
         username: '',
@@ -29,6 +33,8 @@ function SignIn(props) {
         getInput({...input, [prop]: event.target.value})
     };
 
+    const [message, setMessage] = useState(null);
+
     const handleSubmit = useCallback(async () => {
         const requestOptions = {
             method: 'POST',
@@ -38,9 +44,15 @@ function SignIn(props) {
             body: JSON.stringify(input)
         };
       
-        const response = await fetch('http://localhost:5000/api/v1/users/login', requestOptions)
-        const result = await response.text()
-            alert(result)
+        await fetch('http://localhost:5000/api/v1/users/login', requestOptions)
+        .then(res => res.text())
+        .then(() => {
+            setMessage('User Found ' + input.username);
+          })
+          .catch(err => {
+            setMessage('There has been a problem with your fetch operation: ' + err);
+          });
+          snackRef.current.handleSnackOpen()
       },[input]);
   
       useEffect(() => {
@@ -50,6 +62,7 @@ function SignIn(props) {
 
     const { username, password } = input;
     return(
+        <>
         <Grid container direction="row" justify="space-evenly" alignItems="stretch">
             <Card component="form" className={classes.paper}>
                 <Typography gutterBottom variant="h5" component="h2">Sign In Here</Typography>
@@ -84,12 +97,14 @@ function SignIn(props) {
                     <FormHelperText id="password-helper-text">Do not share your password</FormHelperText>
                 </FormControl>
                 <Grid container direction="row" justify="space-evenly" alignItems="stretch">
-                    <Button variant="oultined" className={clsx(classes.margin, classes.button)} href="/" startIcon={<ChevronLeftSharpIcon />} >Create account here</Button>
+                    <Button variant="oultined" className={clsx(classes.margin, classes.button)} href="/users/register" startIcon={<ChevronLeftSharpIcon />} >Create account here</Button>
                     <Button variant="outlined" className={clsx(classes.margin, classes.button)} onClick = {handleSubmit} endIcon={<ChevronRightSharpIcon />} >Sign In</Button>
                 </Grid>
             </Card>
         </Grid>
+        <Snack ref={snackRef} elementValue = {message} />
+        </>
     );
-}
+})
 
 export default SignIn;

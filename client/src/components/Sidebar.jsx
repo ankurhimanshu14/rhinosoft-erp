@@ -16,7 +16,7 @@ import {
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 
-export default function Sidebar({items}) {
+const Sidebar = ({items}) => {
   const [open, setOpen] = React.useState(false);
 
   const handleClick = (item) => {
@@ -68,3 +68,5 @@ export default function Sidebar({items}) {
     </>
   )
 }
+
+export default Sidebar;

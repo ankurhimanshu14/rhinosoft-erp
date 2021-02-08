@@ -30,7 +30,7 @@ const Snack = forwardRef((props, ref) => {
           horizontal: 'right',
         }}
         open={snack}
-        autoHideDuration={6000}
+        autoHideDuration={3000}
         onClose={handleClose}
         message={props.elementValue}
         action={
