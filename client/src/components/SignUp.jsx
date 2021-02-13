@@ -103,7 +103,7 @@ function SignUp() {
                 <FormHelperText id="password-helper-text">Do not share your password</FormHelperText>
             </FormControl>
             <Grid container direction="row" justify="space-evenly" alignItems="stretch">
-                <Button variant="oultined" className={clsx(classes.margin, classes.button)} href="/" startIcon={<ChevronLeftSharpIcon />} >Do you have an account?</Button>
+                <Button variant="oultined" className={clsx(classes.margin, classes.button)} href="/" startIcon={<ChevronLeftSharpIcon />} >Sign in instead</Button>
                 <Button variant="outlined" className={clsx(classes.margin, classes.button)} onClick={() => { dialogboxRef.current.handleClickOpen() }} endIcon={<ChevronRightSharpIcon />} >Register</Button>
             </Grid>
             </Card>

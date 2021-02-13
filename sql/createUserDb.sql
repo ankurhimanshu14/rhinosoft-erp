@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS users
+(
+    id INT PRIMARY KEY auto_increment,
+    username VARCHAR(25) UNIQUE NOT NULL,
+    password LONGTEXT NOT NULL,
+    fullName VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL
+);

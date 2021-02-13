@@ -1,45 +1,62 @@
+const path = require('path');
+const fs = require('fs');
 const mysql = require('mysql');
-const config = require('../../_helpers/config');
 const bcrypt = require('bcrypt');
+const config = require('../../_helpers/config');
 
-let connection = mysql.createConnection(config);
 
-const { FIELDS } = require('../../models/userModel');
+const connection = mysql.createConnection(config);
 
 module.exports = {
+    createUserTable: async (req, res, next) => {
+        const _statement = fs.readFileSync(path.join(__dirname + '../../../sql/createUserDb.sql')).toString();
+
+        await connection.query(_statement, (err, results, fields) => {
+            if(err) {
+                throw err;
+            } else {
+                return results;
+            }
+        })
+
+        next();
+    },
+
     encryptPassword: async (req, res, next) => {
         req._encryptedPassword = await bcrypt.hash(req.body.password, 10)
-        .then(hash => {
-            return hash;
-        })
-        .catch(e => {
-            console.log(e);
-        })
+        .then(hash => {return hash})
+        .catch(err => console.log(err));
+
         next();
     },
 
-    getDataFromUser: async (req, res, next) => {
+    fetchUserData: async (req, res, next) => {
         req._newUser = {
-            [FIELDS.FULL_NAME]: req.body.fullName,
-            [FIELDS.EMAIL]: req.body.email,
-            [FIELDS.USERNAME]: req.body.username,
-            [FIELDS.PASSWORD]: req._encryptedPassword
-        };
+            fullName: req.body.fullName,
+            email: req.body.email,
+            username: req.body.username,
+            password: req._encryptedPassword
+        }
+
         next();
     },
 
-    saveDataToMySQL: (req, res, next) => {
-        let stmt = `INSERT INTO USERS(fullName, email, username, password) VALUES(?, ?, ?, ?)`;
-        let user = Object.values(req._newUser);
-        
-        connection.query(stmt, user, (err, results, fields) => {
-            if(err) {
-                console.log(err.message)
-            } else {
-                console.log('New User ID: '+ results.insertId);
-            }
-        });
+    insertNewUser: async (req, res, next) => {
+        const _statement = fs.readFileSync(path.join(__dirname + '../../../sql/insertUser.sql')).toString();
+        const _query = Object.values(req._newUser);
 
-        next();
+        await connection.query(_statement, _query, (err, results, fields) => {
+            if(err) {
+                res.status(404).send({ data: results, error: err }).end();
+            } else {
+                res.status(200).send({ data: results, error: err }).end();
+            }
+        })
+    },
+
+    response: async (req, res, next) => {
+        // res.status(200).send('Query run successfully').end();
+        
+        // next();
     }
 }
