@@ -9,6 +9,11 @@ router.post('/users/register',
     userRegistration.insertNewUser,
     userRegistration.response
 );
-// router.post('/users/login', userLogin.fetchLoginDetails, userLogin.searchInMySQL, userLogin.response);
+router.post('/users/login',
+    userLogin.getLoginDetails,
+    userLogin.searchInMySQL,
+    userLogin.comparePassword,
+    userLogin.response
+);
 
 module.exports = router;

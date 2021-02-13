@@ -1,13 +1,8 @@
 const path = require('path');
 const fs = require('fs');
-const mysql = require('mysql');
 const bcrypt = require('bcrypt');
-const config = require('../../_helpers/config');
 
-const { createTable, insertData } = require('../../_helpers/SQL_Functions');
-
-
-const connection = mysql.createConnection(config);
+const { createTable, setData } = require('../../_helpers/SQL_Functions');
 
 module.exports = {
     createUserTable: async (req, res, next) => {
@@ -48,7 +43,7 @@ module.exports = {
         const _statement = fs.readFileSync(path.join(__dirname + '../../../sql/insertUser.sql')).toString();
         const _query = Object.values(req._newUser);
 
-        req._query = await insertData(_statement, _query)
+        req._query = await setData(_statement, _query)
         .then(results => {
             return {status: 200, data: results, error: null}
         })

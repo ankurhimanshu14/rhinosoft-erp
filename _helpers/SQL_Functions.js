@@ -16,9 +16,21 @@ module.exports = {
         })
     },
 
-    insertData: (sqlStatement, data) => {
+    setData: (sqlStatement, data) => {
         return new Promise((resolve, reject) => {
             connection.query(sqlStatement, data, (err, results, fields) => {
+                if(err) {
+                    reject(new Error(err));
+                } else {
+                    resolve(results);
+                }
+            })
+        })
+    },
+
+    getData: (sqlStatement, _query) => {
+        return new Promise((resolve, reject) => {
+            connection.query(sqlStatement, _query, (err, results, fields) => {
                 if(err) {
                     reject(new Error(err));
                 } else {
