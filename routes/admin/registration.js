@@ -20,12 +20,16 @@ module.exports = {
     },
 
     encryptPassword: async (req, res, next) => {
+        
+        if(req.body.password) {
+            req._encryptedPassword = await bcrypt.hash(req.body.password, 10)
+            .then(hash => {return hash})
+            .catch(err => console.log(err));          
+        } else {
+            return {status: 404, data: "Password is required", error: err}
+        }
 
-        req._encryptedPassword = await bcrypt.hash(req.body.password, 10)
-        .then(hash => {return hash})
-        .catch(err => console.log(err));
-
-        next();
+        next();  
     },
 
     fetchUserData: async (req, res, next) => {

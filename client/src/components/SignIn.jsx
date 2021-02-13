@@ -46,8 +46,13 @@ const SignIn = forwardRef((props, ref) => {
       
         await fetch('http://localhost:5000/api/v1/users/login', requestOptions)
         .then(res => res.text())
-        .then(() => {
-            setMessage('User Found ' + input.username);
+        .then(result => {
+            result = JSON.parse(result);
+            if(result.DATA === "Access Granted") {
+                setMessage('User found. ' + result.DATA);
+            } else {
+                setMessage('User not found. ' + result.DATA);
+            }
           })
           .catch(err => {
             setMessage('There has been a problem with your fetch operation: ' + err);
