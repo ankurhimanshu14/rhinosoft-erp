@@ -4,6 +4,8 @@ const mysql = require('mysql');
 const bcrypt = require('bcrypt');
 const config = require('../../_helpers/config');
 
+const { createTable, insertData } = require('../../_helpers/SQL_Functions');
+
 
 const connection = mysql.createConnection(config);
 
@@ -11,18 +13,19 @@ module.exports = {
     createUserTable: async (req, res, next) => {
         const _statement = fs.readFileSync(path.join(__dirname + '../../../sql/createUserDb.sql')).toString();
 
-        await connection.query(_statement, (err, results, fields) => {
-            if(err) {
-                throw err;
-            } else {
-                return results;
-            }
+        req._query = await createTable(_statement)
+        .then(results => {
+            return results;
+        })
+        .catch(err => {
+            console.log('Promise Rejection Err: ' + err);
         })
 
         next();
     },
 
     encryptPassword: async (req, res, next) => {
+
         req._encryptedPassword = await bcrypt.hash(req.body.password, 10)
         .then(hash => {return hash})
         .catch(err => console.log(err));
@@ -45,18 +48,21 @@ module.exports = {
         const _statement = fs.readFileSync(path.join(__dirname + '../../../sql/insertUser.sql')).toString();
         const _query = Object.values(req._newUser);
 
-        await connection.query(_statement, _query, (err, results, fields) => {
-            if(err) {
-                res.status(404).send({ data: results, error: err }).end();
-            } else {
-                res.status(200).send({ data: results, error: err }).end();
-            }
+        req._query = await insertData(_statement, _query)
+        .then(results => {
+            return {status: 200, data: results, error: null}
         })
+        .catch(err => {
+            return {status: 404, data: null, error: err}
+        })
+
+        next();
     },
 
     response: async (req, res, next) => {
-        // res.status(200).send('Query run successfully').end();
+        const { status, data, error } = req._query;
+        res.status(status).send({ DATA: data, ERROR: error }).end();
         
-        // next();
+        next();
     }
 }

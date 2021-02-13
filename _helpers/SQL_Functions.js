@@ -4,13 +4,25 @@ const config = require('./config');
 let connection = mysql.createConnection(config);
 
 module.exports = {
-    query: (statement, query, callback) => {
+    createTable: (sqlStatement) => {
         return new Promise((resolve, reject) => {
-            connection.query(statement, query, (err, results, fields) => {
+            connection.query(sqlStatement, (err, results, fields) => {
                 if(err) {
-                    reject(new Error());
+                    reject(new Error(err));
                 } else {
-                    resolve(callback(results));
+                    resolve(results);
+                }
+            })
+        })
+    },
+
+    insertData: (sqlStatement, data) => {
+        return new Promise((resolve, reject) => {
+            connection.query(sqlStatement, data, (err, results, fields) => {
+                if(err) {
+                    reject(new Error(err));
+                } else {
+                    resolve(results);
                 }
             })
         })
