@@ -6,7 +6,7 @@ const { createTable, setData } = require('../../_helpers/SQL_Functions');
 
 module.exports = {
     createUserTable: async (req, res, next) => {
-        const _statement = fs.readFileSync(path.join(__dirname + '../../../sql/users/createUserDb.sql')).toString();
+        const _statement = fs.readFileSync(path.join(__dirname + '../../../sql/createUserDb.sql')).toString();
 
         req._query = await createTable(_statement)
         .then(results => {
@@ -44,7 +44,7 @@ module.exports = {
     },
 
     insertNewUser: async (req, res, next) => {
-        const _statement = fs.readFileSync(path.join(__dirname + '../../../sql/users/insertUser.sql')).toString();
+        const _statement = fs.readFileSync(path.join(__dirname + '../../../sql/insertUser.sql')).toString();
         const _query = Object.values(req._newUser);
 
         req._query = await setData(_statement, _query)

@@ -1,0 +1,10 @@
+INSERT INTO users
+(
+    FIRST_NAME,
+    MIDDLE_NAME,
+    LAST_NAME,
+    DATE_OF_BIRTH,
+    DATE_OF_JOINING,
+    DEPARTMENT,
+    DESIGNATION
+) VALUES (?, ?, ?, ?)
