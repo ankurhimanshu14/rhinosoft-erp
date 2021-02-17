@@ -52,6 +52,7 @@ module.exports = {
             return {status: 200, data: results, error: null}
         })
         .catch(err => {
+            console.log(err);
             return {status: 404, data: null, error: err}
         })
 

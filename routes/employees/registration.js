@@ -1,6 +1,5 @@
 const path = require('path');
 const fs = require('fs');
-const bcrypt = require('bcrypt');
 
 const { createTable, setData } = require('../../_helpers/SQL_Functions');
 
@@ -21,7 +20,6 @@ module.exports = {
 
     fetchEmployeeData: async (req, res, next) => {
         req._newEmployee = {
-            EMPLOYEE_ID: req.body.employeeId,
             FIRST_NAME: req.body.firstName,
             MIDDLE_NAME: req.body.middleName,
             LAST_NAME: req.body.lastName,
@@ -52,6 +50,7 @@ module.exports = {
 
     response: async (req, res, next) => {
         const { status, data, error } = req._query;
+        console.log(req._query);
         res.status(status).send({ DATA: data, ERROR: error }).end();
         
         next();

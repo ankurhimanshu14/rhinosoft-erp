@@ -1,3 +1,3 @@
 UPDATE USERS
 SET password = ?
-WHERE username = ?
+WHERE username = ?;

@@ -1,1 +1,2 @@
-SELECT password FROM USERS WHERE username = ?;
+SET @queryVar := VALUE; 
+SELECT password FROM USERS WHERE @queryVar = ?;
