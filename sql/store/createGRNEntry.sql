@@ -7,6 +7,8 @@ CREATE TABLE IF NOT EXISTS grnEntry
     vehicleNo       VARCHAR(15)     NOT NULL,
     itemCode        VARCHAR(10)     NOT NULL,
     itemDescription VARCHAR(100)    NOT NULL,
+    heatNo          VARCHAR(20)     NOT NULL,
+    heatCode        VARCHAR(10),
     receivedQty     BIGINT          NOT NULL,
     issuedQty       BIGINT          NOT NULL        DEFAULT         0,
     availableQty    BIGINT,

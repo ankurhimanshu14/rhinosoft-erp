@@ -26,6 +26,8 @@ module.exports = {
             vehicleNo: req.body.vehicleNo,
             itemCode: req.body.itemCode,
             itemDescription: req.body.itemDescription,
+            heatNo: req.body.heatNo,
+            heatCode: req.body.heatCode,
             receivedQty: req.body.receivedQty,
             UOM: req.body.UOM
         };

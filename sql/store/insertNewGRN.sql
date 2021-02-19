@@ -6,7 +6,9 @@ INSERT INTO grnEntry
     vehicleNo,
     itemCode,
     itemDescription,
+    heatNo,
+    heatCode,
     receivedQty,
     UOM
 )
-VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
