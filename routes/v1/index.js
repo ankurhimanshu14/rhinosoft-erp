@@ -3,6 +3,7 @@ const router = require('express').Router();
 const { registration: userRegistration, login: userLogin } = require('../admin');
 const { employeeRegistration } = require('../employees');
 const { grnEntry } = require('../GRN');
+const { cuttingProduction } = require('../cuttingProduction');
 
 
 router.post('/users/register',
@@ -31,7 +32,15 @@ router.post('/store/grnEntry',
     grnEntry.fetchGRNDetails,
     grnEntry.insertnewGRN,
     grnEntry.updateAvailableQty,
-    grnEntry.repsonse
+    grnEntry.response
 );
+
+router.post('/cuttingProduction',
+    cuttingProduction.createCuttingRequisition,
+    cuttingProduction.fetchCuttingDetails,
+    cuttingProduction.insertnewCuttingPlan,
+    cuttingProduction.updateTotalWeight,
+    cuttingProduction.response
+)
 
 module.exports = router;

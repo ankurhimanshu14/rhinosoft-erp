@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 const path = require('path');
 const fs = require('fs');
 
-const { getData } = require('../../_helpers/SQL_Functions');
+const QueryFunction = require('../../_helpers/SQL_Functions');
 
 module.exports = {
     getLoginDetails: async (req, res, next) => {
@@ -14,7 +14,7 @@ module.exports = {
     searchInMySQL: async (req, res, next) => {
         const _statement = fs.readFileSync(path.join(__dirname + '../../../sql/admin/loginUser.sql')).toString();
 
-        req._query = await getData(_statement, req._username)
+        req._query = await QueryFunction(_statement, req._username)
         .then(results => {
             results = JSON.stringify(results);
             results = JSON.parse(results);

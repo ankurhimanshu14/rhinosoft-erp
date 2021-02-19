@@ -2,13 +2,13 @@ const path = require('path');
 const fs = require('fs');
 const bcrypt = require('bcrypt');
 
-const { createTable, setData } = require('../../_helpers/SQL_Functions');
+const QueryFunction = require('../../_helpers/SQL_Functions');
 
 module.exports = {
     createUserTable: async (req, res, next) => {
         const _statement = fs.readFileSync(path.join(__dirname + '../../../sql/createUserDb.sql')).toString();
 
-        req._query = await createTable(_statement)
+        req._query = await QueryFunction(_statement)
         .then(results => {
             return results;
         })
@@ -47,7 +47,7 @@ module.exports = {
         const _statement = fs.readFileSync(path.join(__dirname + '../../../sql/insertUser.sql')).toString();
         const _query = Object.values(req._newUser);
 
-        req._query = await setData(_statement, _query)
+        req._query = await QueryFunction(_statement, _query)
         .then(results => {
             return {status: 200, data: results, error: null}
         })

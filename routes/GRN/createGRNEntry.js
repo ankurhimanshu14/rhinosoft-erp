@@ -1,13 +1,13 @@
 const path = require('path');
 const fs = require('fs');
 
-const { createTable, setData, updateData } = require('../../_helpers/SQL_Functions');
+const QueryFunction = require('../../_helpers/SQL_Functions');
 
 module.exports = {
     createGRNEntryTable: async (req, res, next) => {
         const _statement = fs.readFileSync(path.join(__dirname + '../../../sql/store/createGRNEntry.sql')).toString();
 
-        req._query = await createTable(_statement)
+        req._query = await QueryFunction(_statement)
         .then(results => {
             return results;
         })
@@ -39,7 +39,7 @@ module.exports = {
         const _statement = fs.readFileSync(path.join(__dirname + '../../../sql/store/insertNewGRN.sql')).toString();
         const _query = Object.values(req._newGRN);
 
-        req._query = await setData(_statement, _query)
+        req._query = await QueryFunction(_statement, _query)
         .then(results => {
             return results;
         })
@@ -53,7 +53,7 @@ module.exports = {
     updateAvailableQty: async (req, res, next) => {
         const _statement = fs.readFileSync(path.join(__dirname + '../../../sql/store/updateInventory.sql')).toString();
 
-        req._query = await updateData(_statement)
+        req._query = await QueryFunction(_statement)
         .then(results => {
             return {status: 200, data: results, error: null}
         })
@@ -64,7 +64,7 @@ module.exports = {
         next();
     },
 
-    repsonse: async (req, res, next) => {
+    response: async (req, res, next) => {
         const { status, data, error } = req._query;
         res.status(status).send({ DATA: data, ERROR: error }).end();
         

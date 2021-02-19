@@ -1,13 +1,13 @@
 const path = require('path');
 const fs = require('fs');
 
-const { createTable, setData } = require('../../_helpers/SQL_Functions');
+const QueryFunction = require('../../_helpers/SQL_Functions');
 
 module.exports = {
     createEmployeeTable: async (req, res, next) => {
         const _statement = fs.readFileSync(path.join(__dirname + '../../../sql/employees/createEmployeesDb.sql')).toString();
 
-        req._query = await createTable(_statement)
+        req._query = await QueryFunction(_statement)
         .then(results => {
             return results;
         })
@@ -37,7 +37,7 @@ module.exports = {
         const _statement = fs.readFileSync(path.join(__dirname + '../../../sql/employees/insertEmployee.sql')).toString();
         const _query = Object.values(req._newEmployee);
 
-        req._query = await setData(_statement, _query)
+        req._query = await QueryFunction(_statement, _query)
         .then(results => {
             return {status: 200, data: results, error: null}
         })
@@ -50,7 +50,6 @@ module.exports = {
 
     response: async (req, res, next) => {
         const { status, data, error } = req._query;
-        console.log(req._query);
         res.status(status).send({ DATA: data, ERROR: error }).end();
         
         next();
