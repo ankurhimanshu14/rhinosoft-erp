@@ -4,6 +4,7 @@ const { registration: userRegistration, login: userLogin } = require('../admin')
 const { employeeRegistration } = require('../employees');
 const { grnEntry } = require('../GRN');
 const { cuttingProduction } = require('../cuttingProduction');
+const { createPartMaster } = require('../engineering');
 
 
 router.post('/users/register',
@@ -35,12 +36,19 @@ router.post('/store/grnEntry',
     grnEntry.response
 );
 
-router.post('/cuttingProduction',
+router.post('/cuttingProduction/newCuttting',
     cuttingProduction.createCuttingRequisition,
     cuttingProduction.fetchCuttingDetails,
     cuttingProduction.insertnewCuttingPlan,
     cuttingProduction.updateTotalWeight,
     cuttingProduction.response
+)
+
+router.post('/engineering/newPart',
+    createPartMaster.createPartMasterTable,
+    createPartMaster.fetchPartDetails,
+    createPartMaster.insertnewPart,
+    createPartMaster.response
 )
 
 module.exports = router;

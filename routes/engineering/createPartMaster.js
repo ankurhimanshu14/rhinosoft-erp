@@ -4,8 +4,8 @@ const fs = require('fs');
 const QueryFunction = require('../../_helpers/SQL_Functions');
 
 module.exports = {
-    createCuttingRequisition: async (req, res, next) => {
-        const _statement = fs.readFileSync(path.join(__dirname + '../../../sql/cuttingProduction/requisition.sql')).toString();
+    createPartMasterTable: async (req, res, next) => {
+        const _statement = fs.readFileSync(path.join(__dirname + '../../../sql/master/partMaster.sql')).toString();
 
         req._query = await QueryFunction(_statement)
         .then(results => {
@@ -18,36 +18,24 @@ module.exports = {
         next();
     },
 
-    fetchCuttingDetails: async (req, res, next) => {
-        req._newCutting = {
+    fetchPartDetails: async (req, res, next) => {
+        req._newPart = {
             partNo: req.body.partNo,
+            partName: req.body.partName,
+            cutWeight: req.body.cutWeight,
+            grossWeight: req.body.grossWeight,
             grade: req.body.grade,
-            section: req.body.section,
-            
+            section: req.body.section
         };
 
         next();
     },
 
-    insertnewCuttingPlan: async (req, res, next) => {
-        const _statement = fs.readFileSync(path.join(__dirname + '../../../sql/cuttingProduction/insertCuttingPlan.sql')).toString();
-        const _query = Object.values(req._newCutting);
+    insertnewPart: async (req, res, next) => {
+        const _statement = fs.readFileSync(path.join(__dirname + '../../../sql/master/insertNewPart.sql')).toString();
+        const _query = Object.values(req._newPart);
 
         req._query = await QueryFunction(_statement, _query)
-        .then(results => {
-            return results;
-        })
-        .catch(err => {
-            console.log(err);
-        })
-
-        next();
-    },
-
-    updateTotalWeight: async (req, res, next) => {
-        const _statement = fs.readFileSync(path.join(__dirname + '../../../sql/store/updateCuttingProduction.sql')).toString();
-
-        req._query = await QueryFunction(_statement)
         .then(results => {
             return {status: 200, data: results, error: null}
         })
