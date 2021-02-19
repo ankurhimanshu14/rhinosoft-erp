@@ -38,5 +38,17 @@ module.exports = {
                 }
             })
         })
+    },
+
+    updateData: (sqlStatement) => {
+        return new Promise((resolve, reject) => {
+            connection.query(sqlStatement, (err, results, fields) => {
+                if(err) {
+                    reject(new Error(err));
+                } else {
+                    resolve(results);
+                }
+            })
+        })
     }
 }

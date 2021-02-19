@@ -1,0 +1,1 @@
+UPDATE grnEntry SET availableQty = receivedQty - issuedQty;

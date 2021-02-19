@@ -6,7 +6,7 @@ INSERT INTO grnEntry
     vehicleNo,
     itemCode,
     itemDescription,
-    quantity,
+    receivedQty,
     UOM
 )
 VALUES (?, ?, ?, ?, ?, ?, ?, ?);

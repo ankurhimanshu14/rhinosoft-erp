@@ -1,7 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 
-const { createTable, setData } = require('../../_helpers/SQL_Functions');
+const { createTable, setData, updateData } = require('../../_helpers/SQL_Functions');
 
 module.exports = {
     createGRNEntryTable: async (req, res, next) => {
@@ -12,7 +12,7 @@ module.exports = {
             return results;
         })
         .catch(err => {
-            console.log('Promise Rejection Err: ' + err);
+            console.log(err);
         })
 
         next();
@@ -26,11 +26,9 @@ module.exports = {
             vehicleNo: req.body.vehicleNo,
             itemCode: req.body.itemCode,
             itemDescription: req.body.itemDescription,
-            quantity: req.body.quantity,
+            receivedQty: req.body.receivedQty,
             UOM: req.body.UOM
         };
-
-        console.log(req._newGRN);
 
         next();
     },
@@ -41,11 +39,24 @@ module.exports = {
 
         req._query = await setData(_statement, _query)
         .then(results => {
+            return results;
+        })
+        .catch(err => {
+            console.log(err);
+        })
+
+        next();
+    },
+
+    updateAvailableQty: async (req, res, next) => {
+        const _statement = fs.readFileSync(path.join(__dirname + '../../../sql/store/updateInventory.sql')).toString();
+
+        req._query = await updateData(_statement)
+        .then(results => {
             return {status: 200, data: results, error: null}
         })
         .catch(err => {
             console.log(err);
-            return {status: 404, data: null, error: err}
         })
 
         next();

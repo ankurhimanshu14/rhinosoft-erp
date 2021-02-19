@@ -30,6 +30,7 @@ router.post('/store/grnEntry',
     grnEntry.createGRNEntryTable,
     grnEntry.fetchGRNDetails,
     grnEntry.insertnewGRN,
+    grnEntry.updateAvailableQty,
     grnEntry.repsonse
 );
 
