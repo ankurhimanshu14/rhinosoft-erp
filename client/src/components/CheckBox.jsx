@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import {
     Checkbox
 } from '@material-ui/core';
@@ -9,7 +7,7 @@ const CheckBox = (props) => {
         <>
             <Checkbox
             name={props.name}
-            is={props.id}
+            id={props.id}
             defaultChecked
             size = 'small'
             inputProps = {{'aria-label': props.name}}

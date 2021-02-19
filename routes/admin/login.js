@@ -12,7 +12,7 @@ module.exports = {
     },
 
     searchInMySQL: async (req, res, next) => {
-        const _statement = fs.readFileSync(path.join(__dirname + '../../../sql/loginUser.sql')).toString();
+        const _statement = fs.readFileSync(path.join(__dirname + '../../../sql/admin/loginUser.sql')).toString();
 
         req._query = await getData(_statement, req._username)
         .then(results => {
@@ -28,7 +28,7 @@ module.exports = {
     },
 
     comparePassword: async (req, res, next) => {
-
+        console.log(req.body.password, req._query[0].password)
         req._access = await bcrypt.compare(req.body.password, req._query[0].password)
         .then(results => {
             if(results) {

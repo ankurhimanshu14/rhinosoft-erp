@@ -18,6 +18,7 @@ import ChevronRightSharpIcon from '@material-ui/icons/ChevronRightSharp';
 
 import useStyles from '../customStyles';
 import Dialogbox from './Dialogbox';
+import CheckBox from './CheckBox';
 
 function SignUp() {
     const classes = useStyles();
@@ -28,8 +29,16 @@ function SignUp() {
         fullName: '',
         email: '',
         username: '',
-        password: ''
+        password: '',
+        role: true
     });
+
+    const [checked, setCheck] = useState();
+
+    const handleCheck = () => {
+        setCheck(!checked);
+        console.log(checked);
+    }
 
     const handleInput = (prop) => (event) => {
         setInput({...input, [prop]: event.target.value})
@@ -101,6 +110,16 @@ function SignUp() {
                     labelWidth={80}
                 />
                 <FormHelperText id="password-helper-text">Do not share your password</FormHelperText>
+            </FormControl>
+            <FormControl>
+            <InputLabel htmlFor="role">Role</InputLabel>
+                <CheckBox
+                    name="role"
+                    id="role"
+                    checked ={checked}
+                    onChange = {handleCheck}
+                />
+
             </FormControl>
             <Grid container direction="row" justify="space-evenly" alignItems="stretch">
                 <Button variant="oultined" className={clsx(classes.margin, classes.button)} href="/" startIcon={<ChevronLeftSharpIcon />} >Sign in instead</Button>

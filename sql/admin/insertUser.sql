@@ -3,5 +3,7 @@ INSERT INTO users
     fullName,
     email,
     username,
-    password
-) VALUES (?, ?, ?, ?)
+    password,
+    role
+)
+VALUES (?, ?, ?, ?);

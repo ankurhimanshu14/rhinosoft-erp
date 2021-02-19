@@ -2,6 +2,7 @@ const router = require('express').Router();
 
 const { registration: userRegistration, login: userLogin } = require('../admin');
 const { employeeRegistration } = require('../employees');
+const { grnEntry } = require('../GRN');
 
 
 router.post('/users/register',
@@ -23,6 +24,13 @@ router.post('/employees/register',
     employeeRegistration.fetchEmployeeData,
     employeeRegistration.insertNewEmployee,
     employeeRegistration.response
+);
+
+router.post('/store/grnEntry',
+    grnEntry.createGRNEntryTable,
+    grnEntry.fetchGRNDetails,
+    grnEntry.insertnewGRN,
+    grnEntry.repsonse
 );
 
 module.exports = router;
