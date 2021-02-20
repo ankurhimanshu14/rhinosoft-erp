@@ -1,16 +1,16 @@
 import { useState, useRef } from 'react';
 
-// import clsx from 'clsx';
+import clsx from 'clsx';
 
 import {
     Grid,
     Card,
     Typography,
-    // Button
+    Button
 } from '@material-ui/core';
 
-// import ChevronLeftSharpIcon from '@material-ui/icons/ChevronLeftSharp';
-// import ChevronRightSharpIcon from '@material-ui/icons/ChevronRightSharp';
+import ChevronLeftSharpIcon from '@material-ui/icons/ChevronLeftSharp';
+import ChevronRightSharpIcon from '@material-ui/icons/ChevronRightSharp';
 
 import useStyles from '../customStyles';
 import Dialogbox from '../components/Dialogbox';
@@ -52,41 +52,36 @@ const formItems = [
     }
 ];
 
-function SignUp2() {
+function SignUp2(props) {
     const classes = useStyles();
 
     const dialogboxRef = useRef();
 
     const [input, setInput] = useState({
-        fullName: '',
-        email: '',
-        username: '',
-        password: '',
-        role: true
+        input: ''
     });
 
-    // const [checked, setCheck] = useState();
+    let { propName, ...other } = props;
 
-    // const handleCheck = () => {
-    //     setCheck(!checked);
-    //     console.log(checked);
-    // }
-
-    const handleInput = (prop) => (event) => {
-        setInput({...input, [prop]: event.target.value})
-    };
-
-    // const { fullName, email, username, password } = input;
+    const handleInput = (propName) = (event) => {
+        setInput({...other, [propName]: event.target.value});
+        console.log(input, ...other);
+    }
 
     return (
         <>
         <Grid container direction="row" justify="space-evenly" alignItems="stretch">
             <Card component="form" className={classes.paper}>
                 <Typography gutterBottom variant="h5" component="h2">Create Account Here</Typography>
-                <Form items = {formItems} />
+                <Form items = {formItems} onChange = {handleInput} />
+                <Grid container direction="row" justify="space-evenly" alignItems="stretch">
+                    <Button variant="outlined" className={clsx(classes.margin, classes.button)} href="/" startIcon={<ChevronLeftSharpIcon />} >Sign in instead</Button>
+                    <Button variant="outlined" className={clsx(classes.margin, classes.button)} onClick={() => { dialogboxRef.current.handleClickOpen() }} endIcon={<ChevronRightSharpIcon />} >Register</Button>
+                </Grid>
             </Card>
+
         </Grid>
-        <Dialogbox ref={dialogboxRef} elementValue={input} />
+        <Dialogbox ref={dialogboxRef} elementValue={props.input} />
         </>
     )
 }

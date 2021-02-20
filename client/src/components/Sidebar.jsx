@@ -1,7 +1,6 @@
 import React from 'react';
 
 import {
-  Grid,
   Link,
   Collapse,
   List,
@@ -10,7 +9,6 @@ import {
   ListItemIcon,
   Divider,
   ListItemText,
-  Typography
 } from '@material-ui/core';
 
 import ExpandLess from '@material-ui/icons/ExpandLess';
@@ -62,9 +60,6 @@ const Sidebar = ({items}) => {
       </>
       ))}
     </List>
-    <Grid container spacing={100}>
-          <Typography>Social Media Icons</Typography>
-    </Grid>
     </>
   )
 }

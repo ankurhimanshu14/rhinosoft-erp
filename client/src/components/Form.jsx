@@ -23,7 +23,6 @@ const Form = ({items}) => {
                         id={items.propName}
                         aria-describedby={items.helperId}
                         value={items.propName}
-                        onChange={items.handleInput}
                         labelWidth={80}
                     />
                     <FormHelperText id={items.helperId}>{items.helperLabel}</FormHelperText>
