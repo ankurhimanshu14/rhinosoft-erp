@@ -12,20 +12,19 @@ const Form = ({items}) => {
     const classes = useStyles();
     return (
         <Grid container direction="row" justify="space-evenly" alignItems="stretch">
-                {items.map(({items: subItems, ...rest}) => (
+                {items.map(({propName, text, helperId, label, helperLabel, required, type, ...rest}) => (
                 <FormControl fullWidth className={classes.margin} variant="outlined">
-                    <InputLabel htmlFor={items.propName}>{items.label}</InputLabel>
+                    <InputLabel htmlFor={propName}>{label}</InputLabel>
                     <OutlinedInput
                         margin="dense"
-                        required = {items.required}
-                        type={items.text}
-                        name={items.propName}
-                        id={items.propName}
-                        aria-describedby={items.helperId}
-                        value={items.propName}
+                        required = {required}
+                        type={type}
+                        name={propName}
+                        id={propName}
+                        aria-describedby={helperId}
                         labelWidth={80}
                     />
-                    <FormHelperText id={items.helperId}>{items.helperLabel}</FormHelperText>
+                    <FormHelperText id={helperId}>{helperLabel}</FormHelperText>
                 </FormControl>
                 ))}
         </Grid>

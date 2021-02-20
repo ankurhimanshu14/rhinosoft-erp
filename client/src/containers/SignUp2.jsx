@@ -63,8 +63,8 @@ function SignUp2(props) {
 
     let { propName, ...other } = props;
 
-    const handleInput = (propName) = (event) => {
-        setInput({...other, [propName]: event.target.value});
+    const handleInput = (props) = (event) => {
+        setInput({...input, [props]: event.target.value});
         console.log(input, ...other);
     }
 
