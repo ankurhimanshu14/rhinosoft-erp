@@ -16,6 +16,8 @@ CREATE TABLE IF NOT EXISTS grnEntry
     createdBy       VARCHAR(100),
     createdOn       DATETIME        NOT NULL        DEFAULT         NOW(),
     modifiedBy      VARCHAR(100),
-    modifiedOn      DATETIME        NOT NULL        DEFAULT         NOW()
+    modifiedOn      DATETIME        NOT NULL        DEFAULT         NOW(),
+    PRIMARY KEY (grNo),
+    INDEX  (heatNo)
 )
 ENGINE=InnoDB;

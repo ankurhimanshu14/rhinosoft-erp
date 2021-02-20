@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
+import SignUp2 from './containers/SignUp2';
 import Profile from './components/Profile';
 import DataList from './components/DataList';
 import items from './MenuList';
@@ -34,6 +35,7 @@ export default function App() {
             <Switch>
               <Route component={SignIn} exact path="/" />
               <Route component={SignUp} exact path="/users/register" />
+              <Route component={SignUp2} exact path="/users/register2" />
               <Route component={Profile} exact path="/users/profile" />
               <Route component={DataList} exact path="/rmStore/inventory" />
             </Switch>

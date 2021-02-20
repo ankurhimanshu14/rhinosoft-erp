@@ -5,7 +5,7 @@ const { employeeRegistration } = require('../employees');
 const { grnEntry } = require('../GRN');
 const { cuttingProduction } = require('../cuttingProduction');
 const { createPartMaster } = require('../engineering');
-
+const { heatApprovals } = require('../laboratory');
 
 router.post('/users/register',
     userRegistration.createUserTable,
@@ -49,6 +49,12 @@ router.post('/engineering/newPart',
     createPartMaster.fetchPartDetails,
     createPartMaster.insertnewPart,
     createPartMaster.response
+)
+
+router.post('/laboratory/heatApprovals',
+    heatApprovals.createApprovalTable,
+    heatApprovals.insertNewSteel,
+    heatApprovals.response
 )
 
 module.exports = router;
