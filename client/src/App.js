@@ -7,7 +7,8 @@ import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import SignUp2 from './containers/SignUp2';
 import Profile from './components/Profile';
-import DataList from './components/DataList';
+import SteelInventory from './containers/SteelInventory';
+import UsersList from './containers/UsersList';
 import items from './MenuList';
 
 import {
@@ -17,6 +18,7 @@ import {
 } from '@material-ui/core';
 
 import useStyles from './customStyles';
+
 
 export default function App() {
   const classes = useStyles();
@@ -37,7 +39,8 @@ export default function App() {
               <Route component={SignUp} exact path="/users/register" />
               <Route component={SignUp2} exact path="/users/register2" />
               <Route component={Profile} exact path="/users/profile" />
-              <Route component={DataList} exact path="/rmStore/inventory" />
+              <Route component={SteelInventory} exact path="/rmStore/inventory" />
+              <Route component={UsersList} exact path="/admin/userList" />
             </Switch>
           </CardActions>
         </Card>

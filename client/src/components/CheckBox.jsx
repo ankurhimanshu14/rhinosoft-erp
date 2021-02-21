@@ -8,8 +8,9 @@ const CheckBox = (props) => {
             <Checkbox
             name={props.name}
             id={props.id}
-            defaultChecked
+            aria-disabled = "false"
             size = 'small'
+            color = "primary"
             inputProps = {{'aria-label': props.name}}
             />
         </>

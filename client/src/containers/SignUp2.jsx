@@ -63,7 +63,7 @@ function SignUp2(props) {
 
     let { propName, ...other } = props;
 
-    const handleInput = (props) = (event) => {
+    const handleInput = (props) => (event) => {
         setInput({...input, [props]: event.target.value});
         console.log(input, ...other);
     }
@@ -73,7 +73,7 @@ function SignUp2(props) {
         <Grid container direction="row" justify="space-evenly" alignItems="stretch">
             <Card component="form" className={classes.paper}>
                 <Typography gutterBottom variant="h5" component="h2">Create Account Here</Typography>
-                <Form items = {formItems} onChange = {handleInput} />
+                <Form items = {formItems} value={input} onChange = {handleInput} />
                 <Grid container direction="row" justify="space-evenly" alignItems="stretch">
                     <Button variant="outlined" className={clsx(classes.margin, classes.button)} href="/" startIcon={<ChevronLeftSharpIcon />} >Sign in instead</Button>
                     <Button variant="outlined" className={clsx(classes.margin, classes.button)} onClick={() => { dialogboxRef.current.handleClickOpen() }} endIcon={<ChevronRightSharpIcon />} >Register</Button>
