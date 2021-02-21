@@ -8,6 +8,11 @@ import SignUp from './containers/SignUp';
 import SteelInventory from './containers/SteelInventory';
 import UsersList from './containers/UsersList';
 import Profile from './components/Profile';
+<<<<<<< HEAD
+=======
+import SteelInventory from './containers/SteelInventory';
+import UsersList from './containers/UsersList';
+>>>>>>> 30208a57ec7c0bcb925843c78746077a382899ba
 import items from './MenuList';
 
 import {
@@ -17,6 +22,7 @@ import {
 } from '@material-ui/core';
 
 import useStyles from './customStyles';
+
 
 export default function App() {
   const classes = useStyles();
@@ -37,7 +43,11 @@ export default function App() {
               <Route component={SignUp} exact path="/users/register" />
               <Route component={Profile} exact path="/users/profile" />
               <Route component={SteelInventory} exact path="/rmStore/inventory" />
+<<<<<<< HEAD
               <Route component={UsersList} exact path ='/users/usersList' />
+=======
+              <Route component={UsersList} exact path="/admin/userList" />
+>>>>>>> 30208a57ec7c0bcb925843c78746077a382899ba
             </Switch>
           </CardActions>
         </Card>
