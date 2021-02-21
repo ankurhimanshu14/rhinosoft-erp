@@ -1,5 +1,4 @@
 import DataList from '../components/DataList';
-import CheckBox from '../components/CheckBox';
 
 const SteelInventory = (props) => {
 
@@ -14,9 +13,8 @@ const SteelInventory = (props) => {
 
     const data = [
         {
-            name: 'steel1',
+            key: 'steel1',
             row: [
-                { colName: 'selectBox', result: <CheckBox name="selectSteel" id="selectSteels" />},
                 { colName: 'grade', result: '20MnCr5' },
                 { colName: 'section', result: '63 RCS' },
                 { colName: 'heatNo', result: '24803' },
@@ -26,9 +24,8 @@ const SteelInventory = (props) => {
             ]
         },
         {
-            name: 'steel2',
+            key: 'steel2',
             row: [
-                { colName: 'selectBox', result: <CheckBox name="selectSteel" id="selectSteels" />},
                 { colName: 'grade', result: 'SAE 8620H' },
                 { colName: 'section', result: '90 DIA' },
                 { colName: 'heatNo', result: '24804' },
@@ -38,9 +35,8 @@ const SteelInventory = (props) => {
             ]
         },
         {
-            name: 'steel3',
+            key: 'steel3',
             row: [
-                { colName: 'selectBox', result: <CheckBox name="selectSteel" id="selectSteels" />},
                 { colName: 'grade', result: 'SAE 8620H' },
                 { colName: 'section', result: '90 DIA' },
                 { colName: 'heatNo', result: '24803' },
@@ -50,8 +46,10 @@ const SteelInventory = (props) => {
             ]
         }
     ];
-        return (
-            <DataList heads = {heads} body = {data} />
+    return (
+        <>
+        <DataList heads = {heads} body = {data} caption={"As on " + Date()} title="Steel Inventory" />
+        </>
     )
 }
 

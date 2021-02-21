@@ -5,29 +5,30 @@ import {
     TableHead,
     TableRow,
     TableCell, 
-    TableBody
+    TableBody,
+    Typography
 } from '@material-ui/core';
 
 import CheckBox from '../components/CheckBox';
 
-import useStyles from '../customStyles';
-
-const DataList = ({heads, body}) => {
-    const classes = useStyles();
+const DataList = ({heads, body, caption, title}) => {
     return (
         <TableContainer component={Paper}>
-        <Table className={classes.table} size="small" aria-label="a dense table">
+                <Typography gutterBottom variant="h5" component="h2" align="center">{title}</Typography>
+        <Table size="small" aria-label="a dense table with sticky header" stickyHeader>
+        <caption>{caption}</caption>
           <TableHead>
             <TableRow>
-                <TableCell align="right"><CheckBox name="selectSteel" id="selectSteels" /></TableCell>
+                <TableCell align="right">Select</TableCell>
                 {heads.map((items) => (
                     <TableCell align="right" key={items.id}>{items.label}</TableCell>
                 ))}
             </TableRow>
           </TableHead>
           <TableBody>
-            { body.map(({row, ...rest}) => (
+            { body.map(({row, key, ...rest}) => (
               <TableRow>
+                <TableCell align="right"><CheckBox name={key} id={key} /></TableCell>
                 {row.map((subData) => (
                   <TableCell align = "right">{subData.result}</TableCell>
                 ))}
