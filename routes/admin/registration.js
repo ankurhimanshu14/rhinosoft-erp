@@ -20,14 +20,14 @@ module.exports = {
     },
 
     encryptPassword: async (req, res, next) => {
-        
         if(req.body.password) {
             req._encryptedPassword = await bcrypt.hash(req.body.password, 10)
-            .then(hash => {return hash})
-            .catch(err => console.log(err));          
+            .then(hash => {console.log(hash); return hash})
+            .catch(err => console.log(err));
         } else {
-            return {status: 404, data: "Password is required", error: err}
+            console.log("Enter Password");
         }
+
 
         next();  
     },
@@ -37,7 +37,8 @@ module.exports = {
             fullName: req.body.fullName,
             email: req.body.email,
             username: req.body.username,
-            password: req._encryptedPassword
+            password: req._encryptedPassword,
+            role: req.body.role
         }
 
         next();
@@ -45,6 +46,7 @@ module.exports = {
 
     insertNewUser: async (req, res, next) => {
         const _statement = fs.readFileSync(path.join(__dirname + '../../../sql/admin/insertUser.sql')).toString();
+        console.log(req._newUser);
         const _query = Object.values(req._newUser);
 
         req._query = await QueryFunction(_statement, _query)

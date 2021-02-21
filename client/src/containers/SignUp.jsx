@@ -14,7 +14,7 @@ import ChevronRightSharpIcon from '@material-ui/icons/ChevronRightSharp';
 
 import useStyles from '../customStyles';
 import Dialogbox from '../components/Dialogbox';
-// import CheckBox from '../components/CheckBox';
+import CheckBox from '../components/CheckBox';
 import Form from '../components/Form';
 
 const formItems = [
@@ -52,20 +52,17 @@ const formItems = [
     }
 ];
 
-function SignUp2(props) {
+function SignUp(props) {
     const classes = useStyles();
 
     const dialogboxRef = useRef();
 
-    const [input, setInput] = useState({
-        input: ''
+    const [checked, setChecked] = useState({
+        role: "User"
     });
 
-    let { propName, ...other } = props;
-
-    const handleInput = (props) = (event) => {
-        setInput({...input, [props]: event.target.value});
-        console.log(input, ...other);
+    const handleCheck = () => {
+        setChecked({role: "Admin"});
     }
 
     return (
@@ -73,17 +70,17 @@ function SignUp2(props) {
         <Grid container direction="row" justify="space-evenly" alignItems="stretch">
             <Card component="form" className={classes.paper}>
                 <Typography gutterBottom variant="h5" component="h2">Create Account Here</Typography>
-                <Form items = {formItems} onChange = {handleInput} />
+                <Form items = {formItems} />
+                <CheckBox id="role" label="Role" value={checked} onChange={handleCheck} />
                 <Grid container direction="row" justify="space-evenly" alignItems="stretch">
                     <Button variant="outlined" className={clsx(classes.margin, classes.button)} href="/" startIcon={<ChevronLeftSharpIcon />} >Sign in instead</Button>
                     <Button variant="outlined" className={clsx(classes.margin, classes.button)} onClick={() => { dialogboxRef.current.handleClickOpen() }} endIcon={<ChevronRightSharpIcon />} >Register</Button>
                 </Grid>
             </Card>
-
         </Grid>
-        <Dialogbox ref={dialogboxRef} elementValue={props.input} />
+        <Dialogbox ref={dialogboxRef} elementValue={props} />
         </>
     )
 }
 
-export default SignUp2;
+export default SignUp;

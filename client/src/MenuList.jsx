@@ -11,8 +11,8 @@ const items = [
       items: [
         { name: 'createAccount', label: 'Create Account', icon: <AddOutlinedIcon />, link: "/users/register" },
         { name: 'profile', label: 'Profile', icon: <AccountCircleOutlinedIcon />, link: "/users/profile" },
-        { name: 'changePassword', label: 'Change Password', icon: <VisibilityOffOutlinedIcon />, link: "users/changePassword" },
-        { name: 'userList', label: 'All Users', icon: <DescriptionOutlinedIcon />, link: "users/userList" }
+        { name: 'changePassword', label: 'Change Password', icon: <VisibilityOffOutlinedIcon />, link: "/users/changePassword" },
+        { name: 'userList', label: 'All Users', icon: <DescriptionOutlinedIcon />, link: "/users/usersList" }
       ],
     },
     {

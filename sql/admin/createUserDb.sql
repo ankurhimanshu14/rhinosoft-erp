@@ -7,11 +7,10 @@ CREATE TABLE IF NOT EXISTS users
     password    LONGTEXT                NOT NULL,
     role        ENUM("Admin", "User")   NOT NULL        DEFAULT         'User',
     lastLogin   DATETIME                NOT NULL        DEFAULT          NOW(),
-    ipAddress   VARCHAR(20)             NOT NULL,
+    ipAddress   VARCHAR(20),
     createdBy   VARCHAR(100)            NOT NULL        DEFAULT         'admin',
     createdOn   DATETIME                NOT NULL        DEFAULT         NOW(),
     modifiedBy  VARCHAR(100),
-    modifiedOn  DATETIME                NOT NULL        DEFAULT         NOW(),
-    FOREIGN KEY (createdBy)             REFERENCES      users(username) ON DELETE CASCADE
+    modifiedOn  DATETIME                NOT NULL        DEFAULT         NOW()
 )
 ENGINE=InnoDB;

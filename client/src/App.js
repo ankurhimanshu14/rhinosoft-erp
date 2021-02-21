@@ -4,10 +4,10 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import SignIn from './components/SignIn';
-import SignUp from './components/SignUp';
-import SignUp2 from './containers/SignUp2';
+import SignUp from './containers/SignUp';
+import SteelInventory from './containers/SteelInventory';
+import UsersList from './containers/UsersList';
 import Profile from './components/Profile';
-import DataList from './components/DataList';
 import items from './MenuList';
 
 import {
@@ -35,9 +35,9 @@ export default function App() {
             <Switch>
               <Route component={SignIn} exact path="/" />
               <Route component={SignUp} exact path="/users/register" />
-              <Route component={SignUp2} exact path="/users/register2" />
               <Route component={Profile} exact path="/users/profile" />
-              <Route component={DataList} exact path="/rmStore/inventory" />
+              <Route component={SteelInventory} exact path="/rmStore/inventory" />
+              <Route component={UsersList} exact path ='/users/usersList' />
             </Switch>
           </CardActions>
         </Card>

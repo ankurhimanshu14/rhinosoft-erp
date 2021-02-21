@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import {
     Grid,
     FormControl,
@@ -9,6 +11,14 @@ import {
 import useStyles from '../customStyles';
 
 const Form = ({items}) => {
+
+    const [input, setInput] = useState({});
+
+    const handleInput = (prop) => (event) => {
+        setInput({...input, [prop]: event.target.value})
+        console.log(input);
+    };
+
     const classes = useStyles();
     return (
         <Grid container direction="row" justify="space-evenly" alignItems="stretch">
@@ -21,6 +31,7 @@ const Form = ({items}) => {
                         type={type}
                         name={propName}
                         id={propName}
+                        onChange={handleInput(propName)}
                         aria-describedby={helperId}
                         labelWidth={80}
                     />

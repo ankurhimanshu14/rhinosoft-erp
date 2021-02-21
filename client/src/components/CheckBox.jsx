@@ -1,18 +1,21 @@
 import {
-    Checkbox
+    Checkbox,
+    FormControl,
+    InputLabel
 } from '@material-ui/core';
 
 const CheckBox = (props) => {
     return (
-        <>
-            <Checkbox
-            name={props.name}
-            id={props.id}
-            defaultChecked
-            size = 'small'
-            inputProps = {{'aria-label': props.name}}
-            />
-        </>
+        <FormControl>
+            <InputLabel htmlFor="role">{props.label}</InputLabel>
+                <Checkbox
+                name={props.id}
+                id={props.id}
+                defaultChecked
+                size = 'small'
+                inputProps = {{'aria-label': props.id}}
+                />
+        </FormControl>
     )
 }
 
