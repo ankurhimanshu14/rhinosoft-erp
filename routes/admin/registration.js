@@ -22,7 +22,7 @@ module.exports = {
     encryptPassword: async (req, res, next) => {
         if(req.body.password) {
             req._encryptedPassword = await bcrypt.hash(req.body.password, 10)
-            .then(hash => {console.log(hash); return hash})
+            .then(hash => {return hash})
             .catch(err => console.log(err));
         } else {
             console.log("Enter Password");
@@ -46,7 +46,7 @@ module.exports = {
 
     insertNewUser: async (req, res, next) => {
         const _statement = fs.readFileSync(path.join(__dirname + '../../../sql/admin/insertUser.sql')).toString();
-        console.log(req._newUser);
+
         const _query = Object.values(req._newUser);
 
         req._query = await QueryFunction(_statement, _query)
