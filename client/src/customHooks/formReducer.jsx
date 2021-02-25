@@ -11,12 +11,11 @@ module.exports = {
             case 'inputChange':
                 console.log(state)
                 return {
-                    ...state,
+                    ...state.current,
                     [action.field]: action.payload,
-                    value: action.value
                 };
             default:
-                return state;
+                return null;
         }
     }
 };

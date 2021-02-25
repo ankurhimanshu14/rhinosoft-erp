@@ -1,5 +1,5 @@
 import { useReducer, useRef, useCallback, forwardRef, useState, useEffect } from 'react';
-import { formReducer, initialValue} from '../customHooks/formReducer';
+import { formReducer, initialValue } from '../customHooks/formReducer';
 import FormBuilder from '../components/FormBuilder';
 import SignInFields from './SignInFields';
 import Snack from '../components/Snack';
@@ -23,10 +23,8 @@ const SignIn = forwardRef(() => {
         formDispatch({
             type: 'inputChange',
             field: event.target.name,
-            payload: event.target.value,
-            value: inputRef.current.value
+            payload: event.target.value
         })
-        inputRef.current.value=''
     };
     
     const handleSubmit = useCallback(async () => {

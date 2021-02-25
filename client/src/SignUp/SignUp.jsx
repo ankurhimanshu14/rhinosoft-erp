@@ -1,4 +1,4 @@
-import {useReducer, useRef, useState} from 'react';
+import {useReducer, useRef, useState, useEffect} from 'react';
 import { formReducer, initialValue} from '../customHooks/formReducer';
 import FormBuilder from '../components/FormBuilder';
 import SignUpFields from './SignUpFields';
@@ -13,18 +13,21 @@ import useStyles from '../customStyles';
 
 const SignUp = () => {
     const classes = useStyles();
+    
     const dialogRef = useRef();
     const [formState, formDispatch] = useReducer(formReducer, initialValue);
     const inputRef = useRef(formState);
+    
+    useEffect(() => {
+        inputRef.current = formState;
+    })
 
     const handleTextChange = event => {
         formDispatch({
             type: 'inputChange',
             field: event.target.name,
-            payload: event.target.value,
-            value: inputRef.current.value
+            payload: event.target.value
         })
-        inputRef.current.value=''
     };
     
     const [checked, setChecked] = useState({
@@ -35,7 +38,8 @@ const SignUp = () => {
         setChecked({role: "Admin"});
     };
 
-    const handleSubmit = () => {;
+    const handleSubmit = () => {
+        console.log(inputRef.current);
         dialogRef.current.handleClickOpen();
     }
 
