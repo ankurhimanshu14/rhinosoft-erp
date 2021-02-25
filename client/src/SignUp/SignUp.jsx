@@ -1,5 +1,5 @@
 import {useReducer, useRef, useState} from 'react';
-import { formReducer, initialValue} from './SignUpReducer';
+import { formReducer, initialValue} from '../customHooks/formReducer';
 import FormBuilder from '../components/FormBuilder';
 import SignUpFields from './SignUpFields';
 import Dialogbox from '../components/Dialogbox';

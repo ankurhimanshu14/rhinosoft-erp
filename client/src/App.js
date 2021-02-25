@@ -3,7 +3,7 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
-import SignIn from './components/SignIn';
+import SignIn from './SignIn/SignIn';
 import SignUp from './SignUp/SignUp';
 // import SignUp2 from './containers/SignUp2';
 import SteelInventory from './containers/SteelInventory';
