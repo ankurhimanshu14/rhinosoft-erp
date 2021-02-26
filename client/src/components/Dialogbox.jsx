@@ -86,7 +86,7 @@ const Dialogbox = forwardRef((props, ref) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus variant="oultined" className={clsx(classes.margin, classes.button)} onClick={handleDisagree} startIcon={<ThumbDownSharpIcon />} >Disagree</Button>
+          <Button autoFocus variant="outlined" className={clsx(classes.margin, classes.button)} onClick={handleDisagree} startIcon={<ThumbDownSharpIcon />} >Disagree</Button>
           <Button autoFocus variant="outlined" className={clsx(classes.margin, classes.button)} onClick={handleAgree} endIcon={<ThumbUpSharpIcon />} >Agree</Button>
         </DialogActions>
       </Dialog>

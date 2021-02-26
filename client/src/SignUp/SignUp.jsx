@@ -48,7 +48,7 @@ const SignUp = () => {
         <Grid container direction="row" justify="space-evenly" alignItems="stretch">
             <Card component="form" className={classes.paper}>
                 <Typography gutterBottom variant="h5" component="h2">Create Account Here</Typography>
-                <FormBuilder ref={inputRef} items={SignUpFields} value={Object.keys(formState).map(state => (state))} onChange={e => handleTextChange(e)} />
+                <FormBuilder ref={inputRef} items={SignUpFields} value={Object.keys(formState).map(state => {return state})} onChange={e => handleTextChange(e)} />
                 <CheckBox id="role" label="Role" value={checked} onChange={handleCheck} />
                 <Grid container direction="row" justify="space-evenly" alignItems="stretch">
                     <Button variant="outlined" className={clsx(classes.margin, classes.button)} href="/" startIcon={<ChevronLeftSharpIcon />} >Sign In Instead</Button>

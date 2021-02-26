@@ -12,6 +12,7 @@ const FormBuilder = ({items}) => {
                     variant="outlined"
                     margin="dense"
                     name={item.name}
+                    required={item.required}
                     id={item.name}
                     label={item.label}
                     type={item.type}
