@@ -1,51 +1,28 @@
+//App.js
+
 import React from 'react';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
-
-import Navbar from './components/Navbar';
-import Sidebar from './components/Sidebar';
-import SignIn from './SignIn/SignIn';
-import SignUp from './SignUp/SignUp';
-// import SignUp2 from './containers/SignUp2';
-import SteelInventory from './containers/SteelInventory';
-import UsersList from './containers/UsersList';
-import Profile from './components/Profile';
-import items from './MenuList';
-
 import {
-  Grid,
-  Card,
-  CardActions,
-} from '@material-ui/core';
+  BrowserRouter as Router,
+  Switch,
+  // Redirect,
+  Route
+} from 'react-router-dom';
+import routes from './Config/routes';
 
-import useStyles from './customStyles';
-
-
-export default function App() {
-  const classes = useStyles();
+const App = () => {
   return (
-    <BrowserRouter>
-    <Grid container direction="row" spacing={2}>
-      <Grid item xs={12}>
-        <Navbar />
-      </Grid>
-      <Grid item xs={2}>
-        <Sidebar items={items} />
-      </Grid>
-      <Grid className={classes.grid} item xs={10}>
-        <Card className={classes.card}>
-          <CardActions>
-            <Switch>
-              <Route component={SignIn} exact path="/" />
-              <Route component={SignUp} exact path="/users/register" />
-              {/* <Route component={SignUp2} exact path ='/users/register2' /> */}
-              <Route component={Profile} exact path="/users/profile" />
-              <Route component={SteelInventory} exact path="/rmStore/inventory" />
-              <Route component={UsersList} exact path ='/users/usersList' />
-            </Switch>
-          </CardActions>
-        </Card>
-      </Grid>
-    </Grid>
-    </BrowserRouter>
-  );
-}
+    <Router>
+      <Switch>
+        {routes.map(route => (
+          <Route
+          key={route.path}
+          path={route.path}
+          component={route.component}
+          />
+        ))}
+      </Switch>
+    </Router>
+  )
+};
+
+export default App;
