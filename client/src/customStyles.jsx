@@ -10,10 +10,10 @@ const useStyles = makeStyles(theme => ({
     },
 
     margin: {
-        margin: theme.spacing(0.5)
+        margin: theme.spacing(1)
     },
     paper: {
-        padding: '3vh',
+        padding: '5vh',
         width:'40%',
         height: '50%',
         textAlign: 'center',

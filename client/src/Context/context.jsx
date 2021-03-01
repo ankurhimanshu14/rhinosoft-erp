@@ -1,6 +1,7 @@
 // Context/context.jsx
 
 import React from 'react';
+import { RegisterReducer, initialState } from './reducer';
 
 const RegisterStateContext = React.createContext();
 const RegisterDispatchContext = React.createContext();

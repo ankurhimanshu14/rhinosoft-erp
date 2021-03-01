@@ -22,7 +22,7 @@ const SignUp = (props) => {
 
     const handleSignUp = async (e) => {
         e.preventDefault();
-        let payload = {name, email}
+        let payload = {fullName, email, username, password}
         try {
             let response = await signupUser(dispatch, payload) //loginUser action makes the request and handles all the neccessary state changes
             if (!response.user) return
