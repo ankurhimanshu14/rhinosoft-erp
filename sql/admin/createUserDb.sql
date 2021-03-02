@@ -5,7 +5,6 @@ CREATE TABLE IF NOT EXISTS users
     email       VARCHAR(100)            NOT NULL,
     username    VARCHAR(100)            NOT NULL        UNIQUE,
     password    LONGTEXT                NOT NULL,
-    role        ENUM("Admin", "User")   NOT NULL        DEFAULT         'User',
     lastLogin   DATETIME                NOT NULL        DEFAULT          NOW(),
     ipAddress   VARCHAR(20),
     createdBy   VARCHAR(100)            NOT NULL        DEFAULT         'admin',

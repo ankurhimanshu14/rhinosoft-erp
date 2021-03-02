@@ -3,9 +3,7 @@
 import React from 'react';
 import {
   BrowserRouter as Router,
-  Switch,
-  // Redirect,
-  Route
+  Switch
 } from 'react-router-dom';
 import routes from './Config/routes';
 import { RegisterProvider } from './Context';

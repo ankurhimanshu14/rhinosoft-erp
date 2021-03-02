@@ -9,6 +9,7 @@ const AppRoutes = ({ component: Component, path, isPrivate, ...rest }) => {
  
     const userDetails = useRegisterState()
     return (
+        <>
         <Route
             path={path}
             render={props =>
@@ -22,6 +23,8 @@ const AppRoutes = ({ component: Component, path, isPrivate, ...rest }) => {
             }
             {...rest}
         />
+        {console.log(userDetails)}
+        </>
     )
 }
  

@@ -24,9 +24,10 @@ const SignUp = (props) => {
         e.preventDefault();
         let payload = {fullName, email, username, password}
         try {
-            let response = await signupUser(dispatch, payload) //loginUser action makes the request and handles all the neccessary state changes
-            if (!response.user) return
-            props.history.push('/dashboard') //navigate to dashboard on success
+            let response = await signupUser(dispatch, payload)
+            console.log(response.user);
+            if (!response.DATA) return
+            props.history.push('/dashboard')
         } catch (error) {
             console.log(error)
         }
